@@ -19,7 +19,8 @@ export async function getStaticPaths() {
     { params: { slug: 'lumni-transporte' } },
     { params: { slug: 'maria-fumaca' } },
     { params: { slug: 'transfer-privativo' } },
-    { params: { slug: 'tour-linha-bella' } }
+    { params: { slug: 'tour-linha-bella' } },
+    { params: { slug: 'city-tour-do-vinho' } }
   ];
 }
 
@@ -367,6 +368,53 @@ const passeiosData = {
       "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=casa%20antiga%20colonial%20italiana%20casarao%20madeira%20centenario%20gramado%20serra%20gaucha%20jardim%20flores%20dia%20ensolarado&image_size=landscape_16_9"
     ],
     tags: ["Vinícola + degustação", "Casarão centenário", "Cantina Italiana", "História cultura", "Reserva antecipada 48h"]
+  },
+  'city-tour-do-vinho': {
+    id: 12,
+    titulo: "City Tour do Vinho — Canela e Gramado",
+    subtitulo: "Sabores, tradições e paisagens da Serra Gaúcha",
+    categoria: "CITY TOUR",
+    preco: 189.00,
+    avaliacao: 4.95,
+    totalAvaliacoes: 48,
+    parcelas: "Por pessoa:",
+    price1: 189.00,
+    price2: 189.00,
+    label1: "Por pessoa",
+    label2: "Por pessoa",
+    temFaixas: false,
+    temQuantidadePorPessoa: true,
+    valorPorPessoa: 189.00,
+    descricao: "Uma experiência especial pelos sabores, tradições e paisagens da Serra Gaúcha. Com transporte de ida e volta, você conhece uma das vinícolas mais tradicionais da região, experimenta produtos coloniais e ainda visita dois dos pontos mais marcantes de Canela e Gramado. Um passeio perfeito para quem quer conhecer os sabores, a cultura e alguns dos lugares mais tradicionais da Serra Gaúcha em uma única experiência.",
+    inclusos: [
+      "Transporte de ida e volta",
+      "Ingresso para a Vinícola Jolimont",
+      "Degustação na vinícola (vinhos, espumantes e suco de uva)",
+      "Degustação na Família Chaulet (salames, queijos e produtos coloniais)",
+      "Parada para fotos na Catedral de Pedra – Canela",
+      "Visitação à Chocolate Gramadense"
+    ],
+    roteiro: [
+      "Vinícola Jolimont: Visita à tradicional vinícola fundada em 1948 no Vale do Morro Calçado, em Canela. Conhecimento sobre a história e o processo de produção dos vinhos, com degustação de vinhos, espumantes e suco de uva.",
+      "Família Chaulet – Salamaria e Cutelaria: Parada cheia de sabores da Serra Gaúcha. Produção artesanal de salames, copas, queijos e outros produtos coloniais, com degustação e visita aos artigos de cutelaria artesanal.",
+      "Catedral de Pedra – Canela: Parada para conhecer e tirar fotos em um dos principais cartões-postais da Serra Gaúcha. Arquitetura em estilo gótico inglês, torre de aproximadamente 65 metros e carrilhão com 12 sinos de bronze.",
+      "Chocolate Gramadense: Visita à tradicional fábrica de chocolates de Gramado, que produz chocolates artesanais desde 1982, com espaço de visitação para conhecer mais sobre o universo e a produção do chocolate."
+    ],
+    duracao: "Aproximadamente 6 horas",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/jolimont/jolimont.jpg",
+      "/images/jolimont/chaulet.png",
+      "/images/jolimont/igrejadepedra.png",
+      "/images/jolimont/Gramadense.png"
+    ],
+    tags: [
+      "Vinícola Jolimont + degustação",
+      "Família Chaulet: queijos e salames",
+      "Catedral de Pedra Canela",
+      "Chocolate Gramadense",
+      "Transporte ida e volta incluso"
+    ]
   }
 };
 
