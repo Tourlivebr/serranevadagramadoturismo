@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StarRating from '../components/StarRating.astro';
+
+const passeio = {
+  titulo: "Era do Fogo",
+  subtitulo: "Fondue Temático na Caverna Pré-Histórica",
+  categoria: "INGRESSOS E ATRAÇÕES",
+  avaliacao: 4.8,
+  totalAvaliacoes: 0,
+  linkOficial: "https://ingressos.eradofogo.com.br?ac=KRNSCTHGB7",
+  descricao: "A Era do Fogo é o fondue mais cavernoso de Gramado! Dos criadores da Hector Pizzaria, você janta dentro de uma caverna pré-histórica cenográfica, com fósseis, dinossauros animatrônicos, efeitos de fogo e fumaça e atendentes caracterizados como cavernosos que interagem com você. A personagem Gruga conduz a tribo que descobriu o fogo. Sessões às 18h e 21h todos os dias.",
+  inclusos: [
+    "Sequência completa de fondue (Tradicional ou Premium)",
+    "Caça Fria — pratos frios variados",
+    "Poço quente salgado (queijo) com pães, batatas e acompanhamentos",
+    "Carnes de caça sapecadas na pedra quente com 14 molhos",
+    "Poço quente doce com chocolate, doce de leite e Nutella",
+    "Espetáculo imersivo com personagens Gruga e cavernosos"
+  ],
+  duracao: "2h30 a 3h (por sessão)",
+  horarios: ["18:00", "21:00"],
+  endereco: "Av. das Hortênsias, 4901 — Carniel, Gramado/RS",
+  galeria: [
+    "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/v3wu8Q6aRqLU902MsUEdHkIpzMtHuN2NecOce9wx.png",
+    "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/TkqpSH53Tc4yhOlJwJyoI8iVuhbgZD2C7aabBkd0.png",
+    "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/TkqpSH53Tc4yhOlJwJyoI8iVuhbgZD2C7aabBkd0.png",
+    "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/v3wu8Q6aRqLU902MsUEdHkIpzMtHuN2NecOce9wx.png",
+    "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/TkqpSH53Tc4yhOlJwJyoI8iVuhbgZD2C7aabBkd0.png",
+    "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/v3wu8Q6aRqLU902MsUEdHkIpzMtHuN2NecOce9wx.png"
+  ],
+  tags: [
+    "Fondue temático",
+    "Caverna pré-histórica",
+    "Personagens interativos",
+    "Dos criadores da Hector Pizzaria",
+    "Gruga e os cavernosos"
+  ]
+};
+
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}.`;
+const whatsappUrl = `https://wa.me/5554999411358?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<BaseLayout 
+  title={`${passeio.titulo} - Ingresso | Serra Nevada Gramado Turismo - Gramado RS`}
+  description="Ingresso para Era do Fogo! Fondue temático na caverna pré-histórica com personagens Gruga e cavernosos em Gramado/RS."
+  keywords={['Era do Fogo', 'ingresso Era do Fogo', 'fondue temático Gramado', 'caverna pré-histórica', 'Gruga e os cavernosos', 'Serra Nevada Gramado Turismo']}
+  image={passeio.galeria[0]}
+>
+  <Header />
+  
+  <main class="pt-20 lg:pt-24">
+    <!-- Hero Section -->
+    <section class="relative h-96 lg:h-[500px] overflow-hidden" style={`background-image: url('${passeio.galeria[0]}'); background-attachment: fixed; background-size: cover; background-position: center; background-repeat: no-repeat;`}>
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center text-white px-4">
+          <span class="inline-block px-3 py-1 bg-primary-600 text-white text-sm font-medium rounded-full mb-4">
+            {passeio.categoria}
+          </span>
+          <h1 class="text-4xl lg:text-6xl font-bold mb-4">{passeio.titulo}</h1>
+          <p class="text-xl lg:text-2xl text-gray-200">{passeio.subtitulo}</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container mx-auto px-4 py-12">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <!-- Conteúdo Principal -->
+        <div class="lg:col-span-3">
+
+          <!-- Descrição -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Sobre esta atração</h2>
+            <p class="text-gray-700 leading-relaxed">{passeio.descricao}</p>
+          </div>
+
+          <!-- O que está incluso -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">O que está incluso</h3>
+            <ul class="space-y-2">
+              {passeio.inclusos.map(item => (
+                <li class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-gray-700">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Duração e Horários -->
+          <div class="mb-8 grid md:grid-cols-2 gap-6">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold mb-3">Duração</h3>
+              <p class="text-gray-700">{passeio.duracao}</p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold mb-3">Horários</h3>
+              <ul class="space-y-1">
+                {passeio.horarios.map(horario => (
+                  <li class="text-gray-700">🕐 {horario}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Destaques</h3>
+            <div class="flex flex-wrap gap-2">
+              {passeio.tags.map(tag => (
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Botões CTA -->
+          <div class="mb-8">
+            <div class="grid md:grid-cols-2 gap-4">
+              <a 
+                href={passeio.linkOficial} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold text-lg rounded-lg shadow-lg transition-all hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                🎟️ Comprar ingresso oficial
+              </a>
+              <a 
+                href={whatsappUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-bold text-lg rounded-lg shadow-lg transition-all hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                💬 Falar com atendente no WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- Como funciona a sessão -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Como funciona a sessão</h3>
+            <div class="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-r-lg">
+              <ol class="space-y-3 text-gray-700 list-decimal list-inside">
+                <li><strong>Chegada:</strong> Recomendamos chegar com pelo menos 20 minutos de antecedência para check-in e ambientação na caverna.</li>
+                <li><strong>Recepção:</strong> Você será recepcionado pelos cavernosos e conduzido até sua mesa na tribo.</li>
+                <li><strong>Caça Fria:</strong> Começa com os pratos frios variados para abrir o apetite.</li>
+                <li><strong>Poço Quente Salgado:</strong> Sirva-se do delicioso queijo quente com pães, batatas e acompanhamentos.</li>
+                <li><strong>Carnes de Caça:</strong> As carnes são preparadas na pedra quente e acompanhadas de 14 molhos exclusivos.</li>
+                <li><strong>Poço Quente Doce:</strong> A grand finale com chocolate, doce de leite e Nutella.</li>
+                <li><strong>Espetáculo:</strong> Durante toda a sessão, Gruga e os cavernosos interagem com você em um show imersivo.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Dicas importantes -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Dicas importantes</h3>
+            <div class="bg-primary-50 border-l-4 border-primary-500 p-6 rounded-r-lg">
+              <ul class="space-y-2 text-gray-700">
+                <li>✅ Reserve com antecedência, pois as sessões costumam lotar rapidamente.</li>
+                <li>✅ Ideal para famílias, casais e grupos de amigos de todas as idades.</li>
+                <li>✅ A experiência acontece em ambiente fechado com ar-condicionado.</li>
+                <li>✅ Há estacionamento disponível nas proximidades.</li>
+                <li>✅ Opções vegetarianas e veganas disponíveis mediante aviso prévio.</li>
+                <li>✅ Leve sua câmera! Os cenários são perfeitos para fotos incríveis.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Endereço -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Localização</h3>
+            <div class="bg-gray-50 p-6 rounded-lg flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-800">Endereço</h4>
+                <p class="text-gray-700">{passeio.endereco}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Galeria de Imagens -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Galeria</h3>
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {passeio.galeria.map((imagem, index) => (
+                <div class="aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity">
+                  <img 
+                    src={imagem} 
+                    alt={`${passeio.titulo} - Imagem ${index + 1}`}
+                    class="w-full h-full object-cover"
+                    onclick={`openModal('${imagem}')`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal para Galeria -->
+  <div id="imageModal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
+    <div class="relative max-w-4xl max-h-full">
+      <button 
+        onclick="closeModal()"
+        class="absolute -top-10 right-0 text-white hover:text-gray-300 text-2xl"
+      >
+        ✕
+      </button>
+      <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  function openModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = imageSrc;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  document.getElementById('imageModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
+    }
+  });
+</script>

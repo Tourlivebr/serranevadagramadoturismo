@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import HeroQuemSou from '../components/HeroQuemSou.astro';
+import CarrosselPasseios from '../components/CarrosselPasseios.astro';
+import CarrosselPasseiosReceptivo from '../components/CarrosselPasseiosReceptivo.astro';
+import Depoimentos from '../components/Depoimentos.astro';
+import FormularioContato from '../components/FormularioContato.astro';
+import Footer from '../components/Footer.astro';
+
+const seoDescription = "Serra Nevada Gramado Turismo - O seu guia completo de turismo em Gramado e Canela! Translados, passeios, ingressos para atrações e muito mais na Serra Gaúcha. Reserve já!";
+const seoKeywords = [
+  "turismo Gramado",
+  "turismo Canela",
+  "translado Gramado",
+  "translado Canela",
+  "ingressos Gramado",
+  "passeios Serra Gaúcha",
+  "Serra Nevada Gramado Turismo",
+  "Gramado RS",
+  "Canela RS"
+];
+---
+
+<BaseLayout 
+  title="Serra Nevada Gramado Turismo | Turismo em Gramado e Canela - Serra Gaúcha" 
+  description={seoDescription}
+  keywords={seoKeywords}
+  image="/images/Logo_Serra_Nevada.png"
+>
+  <Header />
+  
+  <!-- Seção Hero -->
+  <HeroQuemSou />
+  
+  <!-- Seção de Passeios e Receptivo -->
+  <section id="passeios">
+    <CarrosselPasseiosReceptivo />
+  </section>
+  
+  <!-- Seção de Ingressos e Atrações -->
+  <section id="ingressos">
+    <CarrosselPasseios />
+  </section>
+  
+  <!-- Seção Depoimentos -->
+  <section id="depoimentos">
+    <Depoimentos />
+  </section>
+  
+  <!-- Seção Contato -->
+  <section id="contato" class="bg-white dark:bg-dark-800">
+    <FormularioContato />
+  </section>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>

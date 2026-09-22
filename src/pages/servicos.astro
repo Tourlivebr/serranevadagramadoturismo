@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Serviços | Serra Nevada Gramado Turismo - Turismo em Gramado e Canela" 
+  description="Conheça nossos serviços de turismo em Gramado e Canela: translados, passeios, ingressos para atrações e muito mais na Serra Gaúcha com a Serra Nevada Gramado Turismo!" 
+  keywords={['serviços turísticos', 'translados Gramado', 'passeios Canela', 'ingressos atrações', 'Serra Nevada Gramado Turismo']}
+>
+  <main class="min-h-screen bg-gradient-to-br from-primary-50 to-accent-50 pt-24">
+    <div class="container mx-auto px-4 py-12">
+      <!-- Header da Página -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+          Nossos Serviços
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Descubra as melhores experiências em Gramado e Canela com nossos serviços especializados
+        </p>
+      </div>
+
+      <!-- Cards de Serviços -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <!-- Card Ingressos e Atrações -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+          <div class="h-64 bg-gradient-to-br from-primary-500 to-accent-500 relative overflow-hidden">
+            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center text-white">
+                <svg class="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                </svg>
+                <h3 class="text-2xl font-bold">Ingressos & Atrações</h3>
+              </div>
+            </div>
+          </div>
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              Ingressos e Atrações em Gramado e Canela
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Acesso facilitado às principais atrações turísticas da região. Ingressos com desconto e experiências únicas nos melhores pontos turísticos.
+            </p>
+            <ul class="text-gray-600 mb-8 space-y-2">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Ingressos com desconto
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Principais atrações da região
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Experiências únicas
+              </li>
+            </ul>
+            <a href="/#ingressos" class="inline-flex items-center justify-center w-full bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-600 hover:to-accent-600 transition-all duration-300 transform hover:scale-105">
+              Ver Ingressos e Atrações
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card Passeios e Receptivo -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+          <div class="h-64 bg-gradient-to-br from-primary-600 to-dark-700 relative overflow-hidden">
+            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center text-white">
+                <svg class="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z" clip-rule="evenodd"></path>
+                </svg>
+                <h3 class="text-2xl font-bold">Passeios & Receptivo</h3>
+              </div>
+            </div>
+          </div>
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              Passeios e Receptivo
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Tours personalizados e serviços de receptivo completos. Conheça a região com conforto e segurança através de roteiros exclusivos.
+            </p>
+            <ul class="text-gray-600 mb-8 space-y-2">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Tours personalizados
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Serviço de receptivo completo
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Roteiros exclusivos
+              </li>
+            </ul>
+            <a href="/#passeios" class="inline-flex items-center justify-center w-full bg-gradient-to-r from-primary-600 to-dark-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-dark-800 transition-all duration-300 transform hover:scale-105">
+              Ver Passeios e Receptivo
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="text-center mt-16">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">
+            Precisa de Ajuda para Escolher?
+          </h2>
+          <p class="text-gray-600 mb-6">
+            Entre em contato conosco e receba orientação personalizada para sua viagem
+          </p>
+          <a href="/contato" class="inline-flex items-center bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold py-3 px-8 rounded-lg hover:from-primary-600 hover:to-accent-600 transition-all duration-300 transform hover:scale-105">
+            Falar Conosco
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

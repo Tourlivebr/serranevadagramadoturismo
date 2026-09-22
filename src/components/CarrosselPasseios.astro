@@ -1,0 +1,618 @@
+---
+// Dados dos INGRESSOS OFICIAIS (parceiros)
+const passeios = [
+  {
+    id: 1,
+    titulo: "Era do Fogo Fondue Temático",
+    subtitulo: "A experiência mais cavernosa de Gramado",
+    categoria: "FONDUE TEMÁTICO",
+    imagem: "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/v3wu8Q6aRqLU902MsUEdHkIpzMtHuN2NecOce9wx.png",
+    avaliacao: 4.8,
+    totalAvaliacoes: 320,
+    slug: "era-do-fogo",
+    linkOficial: "https://ingressos.eradofogo.com.br?ac=KRNSCTHGB7",
+    duracao: 150,
+    vendas: 480,
+    tags: [
+      "Fondue na caverna pré-histórica",
+      "Dos criadores da Hector Pizzaria",
+      "Gruga e os cavernosos"
+    ]
+  },
+  {
+    id: 2,
+    titulo: "Ferrovia Secreta Hector",
+    subtitulo: "Sequência de comida americana no trem mágico",
+    categoria: "GASTRONOMIA TEMÁTICA",
+    imagem: "/images/ferrovia hector.webp",
+    avaliacao: 4.7,
+    totalAvaliacoes: 245,
+    slug: "ferrovia-secreta",
+    linkOficial: "https://ferroviasecreta.hectordragao.com.br?ac=DQ8YMF9ULH",
+    duracao: 150,
+    vendas: 310,
+    tags: [
+      "Trem mágico do Hector",
+      "Comida americana farta",
+      "Mágica com Edgar Faísca"
+    ]
+  },
+  {
+    id: 3,
+    titulo: "Hector Pizzaria",
+    subtitulo: "Rodízio de Discos de Sabor na Escola de Magia Ônyra",
+    categoria: "RODÍZIO DE PIZZA",
+    imagem: "https://assets.planne.com.br/apps/56TSFCYPGR3/images/_/6XcTkjcRN2I8ApRkvYfnN7kGtCCPCd7fifjyAMpH.jpg",
+    avaliacao: 4.9,
+    totalAvaliacoes: 512,
+    slug: "hector-pizzaria",
+    linkOficial: "https://ingressos.hectordragao.com.br?ac=VJWCTJOVEW",
+    duracao: 140,
+    vendas: 720,
+    tags: [
+      "Escola de Magia Ônyra",
+      "Mais de 80 sabores de pizza",
+      "Pocket shows com personagens"
+    ]
+  },
+  {
+    id: 4,
+    titulo: "Gatzz Fondue & Show",
+    subtitulo: "Dinner show de Broadway na Serra Gaúcha",
+    categoria: "DINNER SHOW",
+    imagem: "https://fondue.gatzz.com.br/ambiente/gatzz1.jpg",
+    avaliacao: 4.8,
+    totalAvaliacoes: 380,
+    slug: "gatzz",
+    linkOficial: "https://www.gatzz.com.br?ac=X0GS9W27FL",
+    duracao: 180,
+    vendas: 410,
+    tags: [
+      "Fondue premium 3 etapas",
+      "Show com 22 artistas",
+      "Classificação 18+"
+    ]
+  },
+  {
+    id: 5,
+    titulo: "ParksNet Passaporte",
+    subtitulo: "Todos os parques da Serra Gaúcha em um só lugar",
+    categoria: "PASSEIOS E PARQUES",
+    imagem: "https://myjcwvyyspwituevmdeu.supabase.co/storage/v1/render/image/public/product-images/products/1788357118532-q366rrkc9m.webp?width=800&resize=contain&quality=80",
+    avaliacao: 4.9,
+    totalAvaliacoes: 1280,
+    slug: "parksnet",
+    linkOficial: "https://parksnet.com.br/ingressos/?bookingAgency=326",
+    duracao: 480,
+    vendas: 2100,
+    tags: [
+      "Snowland, NBA Park, Skyglass",
+      "Até 10x sem juros",
+      "Cancelamento garantido"
+    ]
+  }
+];
+---
+
+<section class="relative pt-0 lg:pt-0 pb-12 lg:pb-20">
+  <!-- Cabeçalho da seção -->
+  <div class="text-center mb-6 relative z-20">
+    <div class="flex items-center justify-center mb-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-primary-400 to-transparent flex-1 max-w-xs"></div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mx-8">
+        Ingressos e Atrações em <span class="text-primary-600 dark:text-primary-400">Gramado e Canela</span>
+      </h2>
+      <div class="h-px bg-gradient-to-r from-transparent via-primary-400 to-transparent flex-1 max-w-xs"></div>
+    </div>
+  </div>
+
+  <!-- Container do carrossel -->
+  <div class="relative z-20 group/carousel">
+    <div class="overflow-hidden" id="carousel-viewport-ingressos">
+      <div id="carousel-container" class="flex transition-transform duration-[850ms] ease-out pb-4 will-change-transform [backface-visibility:hidden] [transform:translateZ(0)] touch-manipulation">
+        {passeios.map((passeio) => (
+          <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3" data-id={passeio.id}>
+            <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col">
+              <div class="relative h-52 lg:h-56 overflow-hidden">
+                <img 
+                  src={passeio.imagem} 
+                  alt={passeio.titulo}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute top-3 left-3">
+                  <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
+                    {passeio.categoria}
+                  </span>
+                </div>
+              </div>
+              <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
+                <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2">
+                  {passeio.titulo}
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
+                  {passeio.subtitulo}
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2 mb-2">
+                  {passeio.tags.slice(0, 2).map(tag => (
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div class="flex flex-col gap-2 mt-auto">
+                  <a
+                    href={passeio.linkOficial}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
+                  >
+                    RESERVE AGORA
+                  </a>
+                  <a
+                    href={`/${passeio.slug}`}
+                    class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
+                  >
+                    SAIBA MAIS
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <button 
+      id="prev-btn"
+      class="hidden sm:flex absolute sm:-left-1 lg:-left-2 top-1/2 -translate-y-1/2 sm:-translate-x-2 lg:-translate-x-1/2 bg-white dark:bg-dark-800 shadow-lg shadow-black/15 dark:shadow-black/50 rounded-full items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 hover:shadow-xl hover:scale-105 transition-all duration-200 z-30 ring-1 ring-black/5 dark:ring-white/10
+
+             sm:w-[52px] sm:h-[52px] sm:p-3
+             lg:w-14 lg:h-14 lg:p-3
+
+             opacity-0 sm:opacity-80 sm:hover:opacity-100
+             translate-z-0 will-change-transform"
+      aria-label="Anterior"
+      type="button"
+      tabindex="0"
+    >
+      <svg class="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    
+    <button 
+      id="next-btn"
+      class="hidden sm:flex absolute sm:-right-1 lg:-right-2 top-1/2 -translate-y-1/2 sm:translate-x-2 lg:translate-x-1/2 bg-white dark:bg-dark-800 shadow-lg shadow-black/15 dark:shadow-black/50 rounded-full items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 hover:shadow-xl hover:scale-105 transition-all duration-200 z-30 ring-1 ring-black/5 dark:ring-white/10
+
+             sm:w-[52px] sm:h-[52px] sm:p-3
+             lg:w-14 lg:h-14 lg:p-3
+
+             opacity-0 sm:opacity-80 sm:hover:opacity-100
+             translate-z-0 will-change-transform"
+      aria-label="Próximo"
+      type="button"
+      tabindex="0"
+    >
+      <svg class="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Indicadores -->
+  <div id="indicators" class="flex items-center justify-center mt-4 mb-2 gap-2.5 relative z-20 touch-manipulation">
+    <!-- Indicadores serão gerados dinamicamente pelo JavaScript -->
+  </div>
+
+  <!-- Divisor Boleado Suave -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+    <svg 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none" 
+      class="relative block w-[calc(100%+1.3px)] h-[40px] lg:h-[60px]"
+    >
+      <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" class="fill-gray-50 dark:fill-gray-900"></path>
+    </svg>
+  </div>
+</section>
+
+<script>
+  // Dados dos INGRESSOS OFICIAIS (busca JS dinamica)
+  const passeiosData = [
+    {
+      id: 1,
+      titulo: "Era do Fogo Fondue Temático",
+      subtitulo: "A experiência mais cavernosa de Gramado",
+      categoria: "FONDUE TEMÁTICO",
+      imagem: "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/v3wu8Q6aRqLU902MsUEdHkIpzMtHuN2NecOce9wx.png",
+      avaliacao: 4.8,
+      totalAvaliacoes: 320,
+      slug: "era-do-fogo",
+      linkOficial: "https://ingressos.eradofogo.com.br?ac=KRNSCTHGB7",
+      duracao: 150,
+      vendas: 480,
+      tags: ["Fondue na caverna pré-histórica", "Dos criadores da Hector Pizzaria", "Gruga e os cavernosos"]
+    },
+    {
+      id: 2,
+      titulo: "Ferrovia Secreta Hector",
+      subtitulo: "Sequência de comida americana no trem mágico",
+      categoria: "GASTRONOMIA TEMÁTICA",
+      imagem: "/images/ferrovia hector.webp",
+      avaliacao: 4.7,
+      totalAvaliacoes: 245,
+      slug: "ferrovia-secreta",
+      linkOficial: "https://ferroviasecreta.hectordragao.com.br?ac=DQ8YMF9ULH",
+      duracao: 150,
+      vendas: 310,
+      tags: ["Trem mágico do Hector", "Comida americana farta", "Mágica com Edgar Faísca"]
+    },
+    {
+      id: 3,
+      titulo: "Hector Pizzaria",
+      subtitulo: "Rodízio de Discos de Sabor na Escola de Magia Ônyra",
+      categoria: "RODÍZIO DE PIZZA",
+      imagem: "https://assets.planne.com.br/apps/56TSFCYPGR3/images/_/6XcTkjcRN2I8ApRkvYfnN7kGtCCPCd7fifjyAMpH.jpg",
+      avaliacao: 4.9,
+      totalAvaliacoes: 512,
+      slug: "hector-pizzaria",
+      linkOficial: "https://ingressos.hectordragao.com.br?ac=VJWCTJOVEW",
+      duracao: 140,
+      vendas: 720,
+      tags: ["Escola de Magia Ônyra", "Mais de 80 sabores de pizza", "Pocket shows com personagens"]
+    },
+    {
+      id: 4,
+      titulo: "Gatzz Fondue & Show",
+      subtitulo: "Dinner show de Broadway na Serra Gaúcha",
+      categoria: "DINNER SHOW",
+      imagem: "https://fondue.gatzz.com.br/ambiente/gatzz1.jpg",
+      avaliacao: 4.8,
+      totalAvaliacoes: 380,
+      slug: "gatzz",
+      linkOficial: "https://www.gatzz.com.br?ac=X0GS9W27FL",
+      duracao: 180,
+      vendas: 410,
+      tags: ["Fondue premium 3 etapas", "Show com 22 artistas", "Classificação 18+"]
+    },
+    {
+      id: 5,
+      titulo: "ParksNet Passaporte",
+      subtitulo: "Todos os parques da Serra Gaúcha em um só lugar",
+      categoria: "PASSEIOS E PARQUES",
+      imagem: "https://myjcwvyyspwituevmdeu.supabase.co/storage/v1/render/image/public/product-images/products/1788357118532-q366rrkc9m.webp?width=800&resize=contain&quality=80",
+      avaliacao: 4.9,
+      totalAvaliacoes: 1280,
+      slug: "parksnet",
+      linkOficial: "https://parksnet.com.br/ingressos/?bookingAgency=326",
+      duracao: 480,
+      vendas: 2100,
+      tags: ["Snowland, NBA Park, Skyglass", "Até 10x sem juros", "Cancelamento garantido"]
+    }
+  ];
+
+  // Função para criar HTML do card (dinamico / busca)
+  function createCardHTML(passeio) {
+    const tags = (passeio.tags || []).slice(0, 2).map(t =>
+      `<span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">\${t}</span>`
+    ).join('');
+    return `
+      <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3" data-id="\${passeio.id}">
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col">
+          <div class="relative h-52 lg:h-56 overflow-hidden">
+            <img 
+              src="\${passeio.imagem}" 
+              alt="\${passeio.titulo}"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute top-3 left-3">
+              <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
+                \${passeio.categoria}
+              </span>
+            </div>
+            <div class="absolute top-3 right-3 bg-white/90 dark:bg-dark-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
+              ⭐ \${passeio.avaliacao}
+            </div>
+          </div>
+          <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
+            <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2">
+              \${passeio.titulo}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
+              \${passeio.subtitulo}
+            </p>
+            <div class="flex flex-wrap gap-2 mt-2 mb-2">
+              \${tags}
+            </div>
+            <div class="flex flex-col gap-2 mt-auto">
+              <a
+                href="\${passeio.linkOficial || '/'}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
+              >
+                <span class="flex items-center justify-center gap-2">
+                  🎟️ RESERVE AGORA
+                </span>
+              </a>
+              <a
+                href="/\${passeio.slug}"
+                class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
+              >
+                <span class="flex items-center justify-center gap-2">
+                  ℹ️ SAIBA MAIS
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function initCarouselIngressos() {
+    let currentSlide = 0;
+    const container = document.getElementById('carousel-container');
+    const viewport = document.getElementById('carousel-viewport-ingressos');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const indicatorsContainer = document.getElementById('indicators');
+
+    if (!container || !indicatorsContainer) return;
+    let isAnimating = false;
+
+    function isMobile() {
+      return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+    }
+
+    function getSlidesPerView() {
+      if (window.innerWidth >= 1280) return 4;
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
+    }
+    
+    function getTotalSlides() {
+      const totalItems = container.children.length;
+      const slidesPerView = getSlidesPerView();
+      return Math.max(1, totalItems - slidesPerView + 1);
+    }
+
+    function updateIndicators() {
+      const totalSlides = getTotalSlides();
+      const mobile = isMobile();
+      indicatorsContainer.innerHTML = '';
+      
+      for (let i = 0; i < totalSlides; i++) {
+        const indicator = document.createElement('button');
+        const active = i === currentSlide;
+        if (mobile) {
+          indicator.className = `h-1.5 rounded-full transition-all duration-300 ease-out touch-manipulation ${
+            active
+              ? 'w-8 bg-primary-600 shadow-sm shadow-primary-600/40'
+              : 'w-2 bg-gray-300 dark:bg-dark-600'
+          }`;
+        } else {
+          indicator.className = `h-2 w-2 rounded-full transition-colors duration-200 touch-manipulation ${
+            active ? 'bg-primary-600' : 'bg-gray-300 dark:bg-dark-600'
+          }`;
+        }
+        indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+        indicator.addEventListener('click', () => {
+          if (isAnimating) return;
+          currentSlide = i;
+          updateCarousel();
+        });
+        indicatorsContainer.appendChild(indicator);
+      }
+    }
+    
+    function updateCarousel() {
+      isAnimating = true;
+      const firstItem = container.children[0];
+      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 0;
+      container.style.transform = `translate3d(-${currentSlide * itemWidth}px, 0, 0)`;
+
+      const totalSlides = getTotalSlides();
+      if (prevBtn) prevBtn.style.opacity = currentSlide === 0 ? '0.6' : '1';
+      if (nextBtn) nextBtn.style.opacity = currentSlide >= totalSlides - 1 ? '0.6' : '1';
+
+      updateIndicators();
+      setTimeout(() => { isAnimating = false; }, 900);
+    }
+    
+    function createIndicators() {
+      updateIndicators();
+    }
+    
+    function initCarousel() {
+      createIndicators();
+      updateCarousel();
+    }
+
+    function nextSlide() {
+      if (isAnimating) return;
+      const totalSlides = getTotalSlides();
+      currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      if (isAnimating) return;
+      const totalSlides = getTotalSlides();
+      currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+      updateCarousel();
+    }
+
+    let autoPlayInterval;
+    function startAutoPlay() {
+      stopAutoPlay();
+      const mobile = isMobile();
+      const interval = mobile ? 11000 : 8000; // <=== MOBILE MAIS LENTO: 11s vs desktop 8s
+      autoPlayInterval = setInterval(() => {
+        if (document.hidden || document.visibilityState === 'hidden') return;
+        nextSlide();
+      }, interval);
+    }
+    
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = undefined;
+      }
+    }
+
+    prevBtn?.addEventListener('click', prevSlide);
+    nextBtn?.addEventListener('click', nextSlide);
+
+    container.addEventListener('mouseenter', stopAutoPlay);
+    container.addEventListener('mouseleave', startAutoPlay);
+
+    if (container) {
+      container.style.touchAction = 'pan-y';
+    }
+
+    // Swipe touch MELHORADO (eixo X vs Y + drag ao vivo)
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
+    let deltaX = 0;
+    let deltaY = 0;
+    let startTime = 0;
+    let axisLocked = false;
+    let isHorizontal = false;
+
+    container.addEventListener('touchstart', (e) => {
+      if (!e.touches || e.touches.length === 0) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      deltaX = 0;
+      deltaY = 0;
+      isDragging = true;
+      axisLocked = false;
+      isHorizontal = false;
+      startTime = Date.now();
+      stopAutoPlay();
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e) => {
+      if (!isDragging || !e.touches || e.touches.length === 0) return;
+      const cx = e.touches[0].clientX;
+      const cy = e.touches[0].clientY;
+      deltaX = startX - cx;
+      deltaY = Math.abs(startY - cy);
+
+      if (!axisLocked) {
+        const dxAbs = Math.abs(deltaX);
+        if (dxAbs > 10 || deltaY > 10) {
+          axisLocked = true;
+          isHorizontal = dxAbs >= deltaY;
+        }
+      }
+      // Nao interrompa scroll vertical
+      if (axisLocked && !isHorizontal) {
+        isDragging = false;
+        return;
+      }
+      // Feedback visual do drag no mobile
+      if (axisLocked && isHorizontal && isMobile()) {
+        const firstItem = container.children[0];
+        const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 200;
+        const base = currentSlide * itemWidth;
+        const overflow = Math.abs(deltaX) > itemWidth ? (deltaX > 0 ? 1 : -1) * itemWidth * 0.2 : 0;
+        container.style.transform = `translate3d(-${base + deltaX - overflow}px, 0, 0)`;
+      }
+    }, { passive: true });
+    
+    container.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      const elapsed = Date.now() - startTime;
+      const absDx = Math.abs(deltaX);
+      const firstItem = container.children[0];
+      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 200;
+
+      const triggerSwipe = axisLocked && isHorizontal && (
+        absDx >= itemWidth * 0.2 || (elapsed < 280 && absDx >= 30)
+      );
+
+      if (triggerSwipe && absDx > 0) {
+        if (deltaX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      } else if (isMobile()) {
+        updateCarousel();
+      }
+      
+      deltaX = 0;
+      isDragging = false;
+      axisLocked = false;
+      isHorizontal = false;
+      
+      setTimeout(() => {
+        startAutoPlay();
+      }, isMobile() ? 6000 : 1500);
+    }, { passive: true });
+
+    // Pausa AUTOMATICAMENTE quando aba esta oculta (economia bateria)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAutoPlay();
+      else startAutoPlay();
+    });
+
+    // Pausa em qualquer toque do usuario mobile
+    viewport?.addEventListener('touchstart', stopAutoPlay, { passive: true });
+    viewport?.addEventListener('touchcancel', stopAutoPlay, { passive: true });
+
+    // ============== DESKTOP: SCROLL WHEEL no CARROSSEL (nunca mais trava a rolagem) ==============
+    // Antes: passar o mouse sobre o carrossel com overflow-hidden + transition longa
+    // capturava o evento "wheel" e ficava travado. Agora:
+    //  - Shift + Scroll (ou trackpad horizontal / Magic Mouse) avança/retrocede slide
+    //  - Scroll vertical SEMPRE propaga para o body (nunca trava tela)
+    let lastWheelSlide = 0;
+    function onWheelDesktop(evt) {
+      // Não fazer nada durante animação (evita double trigger e nao previne rolagem)
+      if (isAnimating) return;
+      const dx = Math.abs(evt.deltaX);
+      const dy = Math.abs(evt.deltaY);
+      // Scroll HORIZONTAL (shift + wheel, trackpad, Magic Mouse) => troca slide
+      const isHorizontal = (dx > dy) || (evt.shiftKey && dy > 0);
+      if (isHorizontal) {
+        if (Date.now() - lastWheelSlide < 450) return; // throttle
+        const isAnimating = true;
+        lastWheelSlide = Date.now();
+        if (evt.deltaX > 1 || evt.deltaY > 1) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        setTimeout(() => { isAnimating = false; }, 900);
+      }
+      // Qualquer wheel VERTICAL (sem shift) => deixa PROPAGAR PARA O BODY, rola a página normalmente)
+      // NÃO USE evt.preventDefault()! = principal fix do "não consigo rolar"
+    }
+
+    if (viewport) {
+      viewport.addEventListener('wheel', onWheelDesktop, { passive: true });
+    }
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        currentSlide = 0;
+        initCarousel();
+      }, 180);
+    });
+
+    initCarousel();
+    startAutoPlay();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarouselIngressos);
+  } else {
+    initCarouselIngressos();
+  }
+</script>

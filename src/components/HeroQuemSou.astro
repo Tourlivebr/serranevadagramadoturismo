@@ -1,0 +1,307 @@
+---
+// Nenhuma lógica do servidor necessária
+---
+
+<section id="quem-sou" class="relative min-h-[56vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden pt-20 lg:pt-24">
+  <!-- Background Video YouTube (cover total em mobile e desktop) -->
+  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 w-[250vw] max-w-none" style="aspect-ratio: 16 / 9; transform: translate(-50%, -50%);">
+      <div id="youtube-bg-player" class="absolute inset-0 w-full h-full border-0"></div>
+    </div>
+    <!-- Fallback image caso iframe bloqueie autoplay -->
+    <div
+      class="absolute inset-0 bg-cover bg-center -z-10"
+      style="background-image: url('/images/imgfundo.png');"
+    ></div>
+  </div>
+
+  <!-- Overlay escuro para melhor legibilidade -->
+  <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-black/45 to-black/30"></div>
+
+  <!-- Botão Ativar Som (flutuante) -->
+  <button
+    id="toggle-sound-btn"
+    type="button"
+    class="absolute top-24 right-4 z-30 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-gray-900 text-sm font-semibold shadow-lg backdrop-blur-sm transition-all hover:scale-105 animate-pulse"
+    aria-label="Ativar som do vídeo"
+  >
+    <span id="toggle-sound-icon">🔇</span>
+    <span id="toggle-sound-label">Ativar som</span>
+  </button>
+
+  <!-- Conteúdo -->
+  <div class="relative z-20 container mx-auto px-4 pb-2 lg:pb-4">
+    <div class="max-w-4xl mx-auto text-center text-white">
+      <!-- Título Principal -->
+      <div class="space-y-4 lg:space-y-6 mb-6 lg:mb-8">
+        <h1 class="text-3xl lg:text-6xl xl:text-7xl font-bold leading-tight animate-zoom-in">
+          Viva a Serra Gaúcha do seu jeito
+        </h1>
+
+        <p class="text-lg lg:text-2xl leading-relaxed max-w-3xl mx-auto text-gray-100 animate-zoom-in" style="animation-delay: 0.3s; opacity: 0;">
+          Personalize seu roteiro de acordo com seu estilo, tempo e preferências.
+          Conheça Gramado, Canela, Bento Gonçalves, Nova Petrópolis e outros destinos com conforto, segurança e pontualidade.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão TOQUE AQUI para iniciar vídeo (aparece APENAS se autoplay falhou em mobile) -->
+  <button
+    id="start-video-btn"
+    type="button"
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3 px-8 py-5 rounded-2xl bg-primary-600/95 hover:bg-primary-700 text-white font-bold shadow-2xl backdrop-blur-md transition-all hover:scale-105 border-2 border-white/30 animate-pulse hidden"
+    aria-label="Iniciar vídeo de fundo"
+  >
+    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-white text-primary-700 shadow-xl">
+      <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"></path>
+      </svg>
+    </div>
+    <div class="text-center leading-tight">
+      <div class="text-lg">Toque para iniciar o vídeo</div>
+      <div class="text-xs text-white/80 mt-1">Modo Dados Móveis / iOS</div>
+    </div>
+  </button>
+
+  <!-- Seta para baixo -->
+  <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
+    <a href="#passeios" class="text-white hover:text-primary-400 transition-colors animate-bounce">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Divisor Boleado Suave -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+    <svg
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+      class="relative block w-[calc(100%+1.3px)] h-[40px] lg:h-[60px]"
+    >
+      <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" class="fill-gray-50 dark:fill-gray-900"></path>
+    </svg>
+  </div>
+</section>
+
+<script is:inline>
+  (function() {
+    const VIDEO_ID = '-38D8mSztg0';
+    const isMobile = /iPhone|iPad|iPod|Android|Mobi|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent || navigator.vendor || window.opera || '');
+    let player = null;
+    let isMuted = true;
+    let videoStarted = false;
+    let apiReadyTimer = null;
+    let autoplayFailedTimer = null;
+
+    // Botão central visível só se autoplay realmente falhar em mobile
+    function showStartButton() {
+      const btn = document.getElementById('start-video-btn');
+      if (btn) btn.classList.remove('hidden');
+    }
+    function hideStartButton() {
+      const btn = document.getElementById('start-video-btn');
+      if (btn) {
+        btn.classList.add('hidden');
+        btn.classList.remove('animate-pulse');
+      }
+    }
+
+    // Força PLAY MUTED com múltiplas tentativas (mobile bloqueia na 1ª tentativa)
+    function forcePlayMuted() {
+      if (!player || typeof player.playVideo !== 'function') return;
+      try { player.mute(); } catch (_) {}
+      const attempts = [0, 250, 700, 1400, 2400];
+      attempts.forEach((delay) => {
+        setTimeout(() => {
+          try {
+            player.playVideo();
+            player.mute();
+          } catch (_) {}
+        }, delay);
+      });
+    }
+
+    // Carrega API do YouTube IFrame
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    // Fallback: se após 4s API não carregar nem player rodar, mostra botão
+    autoplayFailedTimer = setTimeout(() => {
+      if (!videoStarted) showStartButton();
+    }, 4000);
+
+    window.onYouTubeIframeAPIReady = function() {
+      clearTimeout(apiReadyTimer);
+      player = new YT.Player('youtube-bg-player', {
+        videoId: VIDEO_ID,
+        host: 'https://www.youtube-nocookie.com',
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          loop: 1,
+          playlist: VIDEO_ID,
+          controls: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          disablekb: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          cc_load_policy: 0,
+          hl: 'pt-br',
+          origin: window.location.origin
+        },
+        events: {
+          onReady: function(e) {
+            // Garante playsinline e allow autoplay no elemento iframe real (iOS exige)
+            const iframe = document.getElementById('youtube-bg-player')?.querySelector('iframe')
+              || document.getElementById('youtube-bg-player');
+            if (iframe && iframe.tagName === 'IFRAME') {
+              iframe.setAttribute('playsinline', '');
+              iframe.setAttribute('webkit-playsinline', '');
+              iframe.setAttribute('allowfullscreen', '');
+              iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media; picture-in-picture; accelerometer');
+              iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+            }
+
+            try {
+              e.target.unMute();
+              e.target.setVolume(80);
+              isMuted = e.target.isMuted();
+              updateSoundButton();
+            } catch (err) { /* bloqueado pelo navegador */ }
+
+            // Múltiplas tentativas de PLAY MUTADO (essencial para mobile)
+            forcePlayMuted();
+
+            // Se ainda estiver mutado após 1s, ativa no primeiro toque/clique da página QUALQUER lugar
+            setTimeout(() => {
+              if (!videoStarted) {
+                const firstInteract = function() {
+                  try {
+                    e.target.unMute();
+                    e.target.setVolume(80);
+                    e.target.playVideo();
+                    isMuted = e.target.isMuted();
+                    updateSoundButton();
+                  } catch (err) { /* ignora */ }
+                  document.removeEventListener('click', firstInteract);
+                  document.removeEventListener('touchstart', firstInteract, { capture: true });
+                  document.removeEventListener('keydown', firstInteract);
+                  document.removeEventListener('scroll', firstInteract, { once: true, passive: true });
+                };
+                document.addEventListener('click', firstInteract, { once: true, passive: true });
+                document.addEventListener('touchstart', firstInteract, { once: true, passive: true, capture: true });
+                document.addEventListener('keydown', firstInteract, { once: true, passive: true });
+              }
+            }, 900);
+          },
+          onStateChange: function(e) {
+            // Video ESTÁ reproduzindo (YT.PlayerState.PLAYING === 1, BUFFERING === 3)
+            if (e.data === 1 || e.data === 3) {
+              if (!videoStarted) {
+                videoStarted = true;
+                clearTimeout(autoplayFailedTimer);
+                hideStartButton();
+              }
+            }
+            // Looping garantido em playback 0 (ended)
+            if (e.data === 0) {
+              try {
+                e.target.seekTo(0);
+                e.target.mute();
+                e.target.playVideo();
+              } catch (_) {}
+            }
+          },
+          onError: function(/* evt */) {
+            // Qualquer erro do player: mostra botão toque para iniciar
+            showStartButton();
+          }
+        }
+      });
+    };
+
+    // Atualiza botão flutuante
+    function updateSoundButton() {
+      const btn = document.getElementById('toggle-sound-btn');
+      const icon = document.getElementById('toggle-sound-icon');
+      const label = document.getElementById('toggle-sound-label');
+      if (!btn || !icon || !label) return;
+
+      if (isMuted) {
+        icon.textContent = '🔇';
+        label.textContent = 'Ativar som';
+      } else {
+        icon.textContent = '🔊';
+        label.textContent = 'Som ativo';
+        btn.classList.remove('animate-pulse');
+      }
+    }
+
+    // Ação ao clicar no botão GRANDE central (caso autoplay falhou)
+    document.addEventListener('DOMContentLoaded', function() {
+      const startBtn = document.getElementById('start-video-btn');
+      startBtn?.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (player) {
+          try {
+            player.mute();
+            player.seekTo(0);
+            player.playVideo();
+            hideStartButton();
+          } catch (_) {}
+        } else {
+          // API nem carregou: força recarga light só da div via iframe manual
+          const el = document.getElementById('youtube-bg-player');
+          if (el) {
+            el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + VIDEO_ID +
+              '?autoplay=1&mute=1&loop=1&playlist=' + VIDEO_ID +
+              '&controls=0&modestbranding=1&playsinline=1&rel=0&fs=0&iv_load_policy=3&origin=' +
+              encodeURIComponent(window.location.origin) +
+              '" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; accelerometer" playsinline webkit-playsinline referrerpolicy="no-referrer-when-downgrade" class="w-full h-full border-0"></iframe>';
+            hideStartButton();
+          }
+        }
+      });
+
+      // Botão toggle manual de som (flutuante canto superior direito)
+      const btn = document.getElementById('toggle-sound-btn');
+      btn?.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!player) return;
+        if (isMuted) {
+          player.unMute();
+          player.setVolume(80);
+          player.playVideo();
+        } else {
+          player.mute();
+        }
+        isMuted = player.isMuted();
+        updateSoundButton();
+      });
+    });
+  })();
+</script>
+
+<style>
+  @keyframes zoom-in {
+    0% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-zoom-in {
+    animation: zoom-in 2s ease-out forwards;
+    opacity: 0;
+  }
+</style>

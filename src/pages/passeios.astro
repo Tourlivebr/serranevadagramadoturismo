@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StarRating from '../components/StarRating.astro';
+
+// Dados dos passeios (RECEPTIVO / PASSEIOS PRIVATIVOS) — TODOS os 8 cards do CarrosselPasseiosReceptivo.astro na home (mesma ordem)
+const passeios = [
+  {
+    id: 1,
+    titulo: "City Tour Privativo",
+    subtitulo: "Roteiro personalizado com motorista/guia",
+    categoria: "CITY TOUR",
+    imagem: "/images/transfer11.jpg",
+    avaliacao: 5.0,
+    totalAvaliacoes: 64,
+    slug: "city-tour-privativo",
+    duracao: "Flexível",
+    price1: 380,
+    label1: "1 a 4 pessoas",
+    price2: 480,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o City Tour Privativo.",
+    tags: ["Roteiro personalizado", "Motorista / Guia", "Gramado e Canela"]
+  },
+  {
+    id: 2,
+    titulo: "Transporte Olivas",
+    subtitulo: "Translado para as Olivas de Gramado",
+    categoria: "TRANSFER",
+    imagem: "/images/olivas/olivas_card.jpg",
+    avaliacao: 4.9,
+    totalAvaliacoes: 42,
+    slug: "transporte-olivas",
+    duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 350,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte para as Olivas.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Valor de ida e volta"]
+  },
+  {
+    id: 3,
+    titulo: "Transporte Jolimont",
+    subtitulo: "Translado para a Vinícola Jolimont",
+    categoria: "TRANSFER",
+    imagem: "/images/jolimont/jolimont.jpg",
+    avaliacao: 4.95,
+    totalAvaliacoes: 58,
+    slug: "transporte-jolimont",
+    duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 350,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte para a Jolimont.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Valor de ida e volta"]
+  },
+  {
+    id: 4,
+    titulo: "Transporte Sky Glass",
+    subtitulo: "Translado para a Skyglass Canela",
+    categoria: "TRANSFER",
+    imagem: "/images/skyglass/skyglass.jpg",
+    avaliacao: 4.9,
+    totalAvaliacoes: 37,
+    slug: "transporte-sky-glass",
+    duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 320,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte para Sky Glass.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Valor de ida e volta"]
+  },
+  {
+    id: 5,
+    titulo: "Bondinhos Transporte",
+    subtitulo: "Translado para os Bondinhos Aéreos",
+    categoria: "TRANSFER",
+    imagem: "/images/bondinhos.avif",
+    avaliacao: 4.85,
+    totalAvaliacoes: 29,
+    slug: "bondinhos-transporte",
+    duracao: "Flexível",
+    price1: 180,
+    label1: "1 a 4 pessoas",
+    price2: 320,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte dos Bondinhos.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Bondinhos Aéreos"]
+  },
+  {
+    id: 6,
+    titulo: "City Tour Nova Petrópolis",
+    subtitulo: "Roteiro completo por Nova Petrópolis",
+    categoria: "CITY TOUR",
+    imagem: "/images/Nova_Petropolis.jpg",
+    avaliacao: 4.92,
+    totalAvaliacoes: 51,
+    slug: "city-tour-nova-petropolis",
+    duracao: "Flexível",
+    price1: 320,
+    label1: "1 a 4 pessoas",
+    price2: 400,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o City Tour de Nova Petrópolis.",
+    tags: ["Roteiro completo", "Nova Petrópolis", "Motorista / Guia"]
+  },
+  {
+    id: 7,
+    titulo: "Lumni Transporte",
+    subtitulo: "Translado para a experiência Lumni",
+    categoria: "TRANSFER",
+    imagem: "/images/lumini.webp",
+    avaliacao: 4.8,
+    totalAvaliacoes: 18,
+    slug: "lumni-transporte",
+    duracao: "Flexível",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 300,
+    label2: "5 a 6 pessoas",
+    whatsappText: "Olá! Quero reservar o Transporte Lumni.",
+    tags: ["Buscamos e deixamos no hotel", "Carro executivo com ar", "Experiência Lumni"]
+  },
+  {
+    id: 8,
+    titulo: "Trem Maria Fumaça",
+    subtitulo: "Passeio de Maria Fumaça pela Serra Gaúcha",
+    categoria: "TREM",
+    imagem: "/images/maria-fumaca/fumaca01.jpg",
+    avaliacao: 4.96,
+    totalAvaliacoes: 128,
+    slug: "maria-fumaca",
+    duracao: "Flexível",
+    price1: 1300,
+    label1: "1 e 2 pessoas",
+    price2: 2999.9,
+    label2: "6 pessoas",
+    whatsappText: "Olá! Quero reservar o passeio de Trem Maria Fumaça.",
+    tags: ["Trem Maria Fumaça", "Serra Gaúcha", "Roteiro Turístico"]
+  },
+  {
+    id: 9,
+    titulo: "Transfer Ida e Volta • Porto Alegre / Gramado ou Canela",
+    subtitulo: "Transporte privativo executivo com motorista/guia",
+    categoria: "RECEPTIVO",
+    imagem: "/images/Transfer/Transfer.jpg",
+    avaliacao: 4.95,
+    totalAvaliacoes: 127,
+    slug: "transfer-privativo",
+    duracao: "~2h por trecho",
+    price1: 280,
+    label1: "1 trecho (só ida ou só volta)",
+    price2: 550,
+    label2: "Ida e Volta",
+    whatsappText: "Olá! Quero reservar o Transfer Ida e Volta Porto Alegre / Gramado ou Canela.",
+    tags: ["Sem espera no embarque/desembarque", "Embarque imediato", "Privacidade total", "Motorista / Guia experiente"]
+  },
+  {
+    id: 10,
+    titulo: "Tour Linha Bella",
+    subtitulo: "História, cultura e sabores da Serra Gaúcha + Almoço Cantina",
+    categoria: "CULTURA",
+    imagem: "https://site-assets.planne.com.br/clients/linhabella/home-prevideo.jpg",
+    avaliacao: 4.9,
+    totalAvaliacoes: 187,
+    slug: "tour-linha-bella",
+    duracao: "Das 07:30 às 15:00 (aprox. 7h30)",
+    price1: 319.00,
+    label1: "Por pessoa",
+    price2: 319.00,
+    label2: "Reserva antecipada 48h",
+    whatsappText: "Olá! Quero reservar o Tour Linha Bella.",
+    tags: ["Vinícola + degustação", "Casarão centenário Marcon", "Cantina Italiana", "Almoço típico completo", "História e cultura"]
+  }
+];
+---
+
+<BaseLayout 
+  title="Passeios e Translados | Serra Nevada Gramado Turismo - Gramado e Canela"
+  description="Descubra os melhores passeios privativos, translados e receptivo em Gramado e Canela. Experiências únicas na Serra Gaúcha com a Serra Nevada Gramado Turismo!"
+  keywords={['passeios Gramado', 'passeios Canela', 'translados Serra Gaúcha', 'passeios privativos RS', 'Serra Nevada Gramado Turismo']}
+  image="/images/link_passeios1.jpg"
+>
+  <Header />
+  
+  <main class="pt-20 lg:pt-24">
+<!-- Hero Section -->
+<section 
+  class="relative text-white py-8 lg:py-20 bg-center bg-cover bg-no-repeat bg-scroll lg:bg-local"
+  style="background-image: url('/images/link_passeios1.jpg');"
+>
+  <!-- Filtro de cor aplicado em div filha (não trava scroll no Chrome PC) -->
+  <div class="absolute inset-0 pointer-events-none" style="filter: brightness(1.05) contrast(1.1) saturate(1.2); mix-blend-mode: multiply;"></div>
+  <!-- Overlay branco bem leve só pra não perder legibilidade -->
+  <div class="absolute inset-0 bg-white/10"></div>
+
+  <div class="relative container mx-auto px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">Translados e Passeios</h1>
+      <p class="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
+        Experiências autênticas e inesquecíveis na região colonial
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div class="flex items-center text-white/90">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          Guia especializado
+        </div>
+        <div class="flex items-center text-white/90">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          Transporte incluso
+        </div>
+        <div class="flex items-center text-white/90">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          Experiência personalizada
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divisor Boleado Suave -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+    <svg 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none" 
+      class="relative block w-[calc(100%+1.3px)] h-[30px] lg:h-[50px]"
+    >
+      <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" class="fill-gray-50 dark:fill-gray-900"></path>
+    </svg>
+  </div>
+</section>
+
+
+    <!-- Filtros -->
+    <section class="py-6 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div class="container mx-auto px-4">
+      </div>
+    </section>
+
+    <!-- Grid de Passeios (estrutura IDENTICA aos cards da home) -->
+    <section class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+      <div class="container mx-auto px-4">
+        <div id="passeios-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {passeios.map((passeio) => (
+            <div class="passeio-card h-full group" data-category={passeio.categoria.toLowerCase().replace(' ', '-').replace('passeios-privativos', 'privativos')}>
+            <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-dark-700 h-full flex flex-col">
+              <div class="relative h-52 lg:h-56 overflow-hidden">
+                <img 
+                  src={passeio.imagem} 
+                  alt={passeio.titulo}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute top-3 left-3">
+                  <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full shadow backdrop-blur-sm">
+                    {passeio.categoria}
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 bg-white/90 dark:bg-dark-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
+                  ⭐ {passeio.avaliacao}
+                </div>
+              </div>
+              
+              <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1">
+                    <StarRating rating={passeio.avaliacao} />
+                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-1 font-medium">({passeio.totalAvaliacoes})</span>
+                  </div>
+                  <span class="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                    ⏱ {passeio.duracao}
+                  </span>
+                </div>
+                
+                <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors duration-200">
+                  {passeio.titulo}
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
+                  {passeio.subtitulo}
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mt-2 mb-2">
+                  {passeio.tags && passeio.tags.slice(0, 2).map(tag => (
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <div class="border-t border-gray-100 dark:border-dark-700 pt-4 space-y-3">
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-gray-50 dark:bg-dark-700/50 rounded-lg p-2 text-center">
+                      <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label1}</p>
+                      <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
+                        R$ {passeio.price1.toFixed(2).replace('.', ',')}
+                      </p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-dark-700/50 rounded-lg p-2 text-center">
+                      <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label2}</p>
+                      <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
+                        R$ {passeio.price2.toFixed(2).replace('.', ',')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-2 mt-auto">
+                  <a
+                    href={`/passeio/${passeio.slug}`}
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
+                  >
+                    RESERVE AGORA
+                  </a>
+                  
+                  <a
+                    href={`https://wa.me/5554996474071?text=${encodeURIComponent(passeio.whatsappText || `Olá! Gostaria de reservar o passeio: ${passeio.titulo}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full border-2 border-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 text-green-600 dark:text-green-400 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
+                  >
+                    Fale no WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Filtros
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active de todos os botões
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-primary-600', 'text-white');
+        b.classList.add('bg-gray-200', 'text-gray-700', 'dark:bg-dark-700', 'dark:text-gray-300');
+      });
+      
+      // Adiciona active ao botão clicado
+      btn.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-dark-700', 'dark:text-gray-300');
+      btn.classList.add('bg-primary-600', 'text-white');
+      
+      const filter = btn.dataset.filter;
+      const cards = document.querySelectorAll('.passeio-card');
+      
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

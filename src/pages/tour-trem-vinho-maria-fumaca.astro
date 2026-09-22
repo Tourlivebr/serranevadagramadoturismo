@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StarRating from '../components/StarRating.astro';
+import FormReserva from '../components/FormReserva.astro';
+
+const passeio = {
+  titulo: "Tour Uva e Vinho + Passeio de Maria Fumaça + Epopeia + Almoço (Coletivo)",
+  subtitulo: "Com Trem Maria Fumaça e Épopeia",
+  categoria: "PASSEIOS",
+  preco: 550.00,
+  avaliacao: 4.93,
+  totalAvaliacoes: 218,
+  parcelas: "A partir de:",
+  descricao: "Embarque no Encanto do Passeio de Maria Fumaça! Uma experiência única que combina a nostalgia do Trem Maria Fumaça com a magia dos vinhedos locais. O passeio acontece na região entre as Cidades de Bento Gonçalves e Carlos Barbosa, oferecendo degustação de vinhos artesanais, apresentações culturais e paisagens deslumbrantes da Serra Gaúcha.",
+  inclusos: [
+    "Transporte (Van, Micro ou Ônibus)",
+    "Ingressos para o Trem Maria Fumaça",
+    "Ingresso para Epopeia Italiana",
+    "Almoço",
+    "Degustação de Vinho e Suco no Trem Maria Fumaça",
+    "Degustações na Vinícola",
+    "Guia especializado",
+    "Busca na hospedagem (zona urbana)"
+  ],
+  naoInclusos: [
+    "Bebidas no almoço"
+  ],
+  duracao: "Dia inteiro (aproximadamente 12 horas)",
+  horarios: ["Entre 6h e 7h (Gramado)", "Entre 8h30 e 9h (Bento Gonçalves)"],
+  galeria: [
+    "/images/maria-fumaca/fumaca01.jpg",
+    "/images/maria-fumaca/maria-fumaca02.webp",
+    "/images/maria-fumaca/maria-fumaca03.webp",
+    "/images/maria-fumaca/maria-fumaca04.webp",
+    "/images/maria-fumaca/maria-fumaca05.webp",
+    "/images/maria-fumaca/maria-fumaca06.webp",
+    "/images/maria-fumaca/maria-fumaca07.webp",
+    "/images/maria-fumaca/maria-fumaca08.webp",
+    "/images/maria-fumaca/maria-fumaca09.webp"
+  ],
+  tags: [
+    "Buscamos na sua Hospedagem (Zona urbana)",
+    "Isento para criança até 5 anos",
+    "1 criança acompanhada 2 Adultos é cortesia",
+    "Ingressos Trem Maria Fumaça",
+    "Epopeia Italiana",
+    "Almoço Italiano - Sequência típica",
+    "Degustação na Vinícola"
+  ],
+  roteiro: [
+    "Passeio de Trem Maria Fumaça, com duração de 1h30, percorrendo o caminho entre as cidades de Bento Gonçalves (embarque ou desembarque), Garibaldi (parada para Degustação com dança e música) e Carlos Barbosa(embarque ou desembarque), oferecendo show típico italiano, tarantela.",
+    "Almoço com sequência Italiana.",
+    "Visita em Malharia.",
+    "Visita no Parque Temático Epopeia Italiana, aonde Rosa e Lazaro, personagens principais, contam através dos lindos cenários a história da chegada da imigração italiana no Brasil.",
+    "Visita em Vinícola Aurora, com a explanação e visualização de todo o procedimento de fabricação de vinhos, espumantes e sucos.",
+    "Visita na Queijaria Fetina de Formaio, com degustação de queijos, salames copas e iguarias coloniais.",
+    "Visita no varejo da Tramontina, onde você poderá visualizar toda linha de produtos em um gigantesco showroom."
+  ],
+  diasRealizacao: {
+    "Fev, Mar, Abr, Mai, Jun, Ago, Set, Out": "Quarta, Sexta, Sábado e Domingo",
+    "Jul, Nov, Dez e Jan": "Terça à Domingo"
+  },
+  horariosDetalhados: {
+    gramado: {
+      saida: "Entre 6h e 7h",
+      retorno: "até às 19h30",
+      local: "Buscamos e deixamos na sua hospedagem em Gramado ou Canela (zona urbana)"
+    },
+    bentoGoncalves: {
+      saida: "Entre 8h30 e 9h",
+      retorno: "até às 17h30",
+      local: "Marcamos ponto de Encontro na Estação do Trem de Bento Gonçalves ou Estação do Trem de Carlos Barbosa"
+    }
+  }
+};
+
+const whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')} em ${passeio.parcelas}.`;
+const whatsappUrl = `https://wa.me/5554999411358?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<BaseLayout 
+  title={`${passeio.titulo} | Serra Nevada Gramado Turismo - Gramado RS`}
+  description="Tour Uva e Vinho com Trem Maria Fumaça e Epopeia! Deguste vinhos, explore vinhedos e aproveite o almoço típico com a Serra Nevada Gramado Turismo!"
+  keywords={['Tour Uva e Vinho', 'Trem Maria Fumaça', 'Epopeia Italiana', 'passeio vinho Gramado', 'Serra Nevada Gramado Turismo']}
+  image={passeio.galeria[0]}
+>
+  <Header />
+  
+  <main class="pt-20 lg:pt-24">
+    <!-- Hero Section -->
+    <section class="relative h-48 lg:h-[350px] overflow-hidden" style={`background-image: url('${passeio.galeria[0]}'); background-attachment: fixed; background-size: cover; background-position: center; background-repeat: no-repeat;`}>
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center text-white px-4">
+          <span class="inline-block px-3 py-1 bg-primary-600 text-white text-sm font-medium rounded-full mb-4">
+            {passeio.categoria}
+          </span>
+          <h1 class="text-3xl lg:text-5xl font-bold mb-4">{passeio.titulo}</h1>
+          <p class="text-xl lg:text-2xl text-gray-200">{passeio.subtitulo}</p>
+        </div>
+      </div>
+
+      <!-- Divisor Boleado Suave -->
+      <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+        <svg 
+          viewBox="0 0 1200 120" 
+          preserveAspectRatio="none" 
+          class="relative block w-[calc(100%+1.3px)] h-[30px] lg:h-[50px]"
+        >
+          <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" class="fill-white dark:fill-gray-900"></path>
+        </svg>
+      </div>
+    </section>
+
+    <div class="container mx-auto px-4 py-12">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+
+          <!-- Descrição -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Sobre este passeio</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">{passeio.descricao}</p>
+          </div>
+
+          <!-- Roteiro do Passeio -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Roteiro do Passeio</h3>
+            <div class="space-y-4">
+              {passeio.roteiro.map((item, index) => (
+                <div class="flex items-start space-x-3">
+                  <div class="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    {index + 1}
+                  </div>
+                  <p class="text-gray-700 leading-relaxed">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- O que está incluso -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">O que está incluso</h3>
+            <ul class="space-y-2">
+              {passeio.inclusos.map(item => (
+                <li class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-gray-700">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- O que não está incluso -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">O que não está incluso</h3>
+            <ul class="space-y-2">
+              {passeio.naoInclusos.map(item => (
+                <li class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-gray-700">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Dias de Realização -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Dias de Realização</h3>
+            <div class="space-y-2">
+              {Object.entries(passeio.diasRealizacao).map(([periodo, dias]) => (
+                <div class="flex items-center space-x-3">
+                  <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-gray-700"><strong>{periodo}:</strong> {dias}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Horários Detalhados -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Horários e Locais de Saída</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="bg-primary-50 p-4 rounded-lg">
+                <h4 class="font-bold text-primary-800 mb-2">Região de Gramado</h4>
+                <p class="text-sm text-primary-700 mb-1"><strong>Saída:</strong> {passeio.horariosDetalhados.gramado.saida}</p>
+                <p class="text-sm text-primary-700 mb-1"><strong>Retorno:</strong> {passeio.horariosDetalhados.gramado.retorno}</p>
+                <p class="text-sm text-primary-700"><strong>Local:</strong> {passeio.horariosDetalhados.gramado.local}</p>
+              </div>
+              <div class="bg-green-50 p-4 rounded-lg">
+                <h4 class="font-bold text-green-800 mb-2">Região de Bento Gonçalves</h4>
+                <p class="text-sm text-green-700 mb-1"><strong>Saída:</strong> {passeio.horariosDetalhados.bentoGoncalves.saida}</p>
+                <p class="text-sm text-green-700 mb-1"><strong>Retorno:</strong> {passeio.horariosDetalhados.bentoGoncalves.retorno}</p>
+                <p class="text-sm text-green-700"><strong>Local:</strong> {passeio.horariosDetalhados.bentoGoncalves.local}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Destaques</h3>
+            <div class="flex flex-wrap gap-2">
+              {passeio.tags.map(tag => (
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Galeria de Imagens -->
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Galeria</h3>
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {passeio.galeria.map((imagem, index) => (
+                <div class="aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity">
+                  <img 
+                    src={imagem} 
+                    alt={`${passeio.titulo} - Imagem ${index + 1}`}
+                    class="w-full h-full object-cover"
+                    onclick={`openModal('${imagem}')`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Observações Importantes -->
+          <div class="mb-8 bg-yellow-50 p-6 rounded-xl">
+            <h3 class="text-xl font-bold mb-4 text-yellow-800">Observações Importantes</h3>
+            <ul class="space-y-2 text-yellow-700">
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-yellow-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Uma criança de até 5 anos, acompanhada por dois adultos, não será cobrado.</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-yellow-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Opcional: Assento para criança no transporte rodoviário, consulte valores.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sidebar de Reserva -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-32">
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-lg">
+              <FormReserva
+                passeioNome={passeio.titulo}
+                passeioParcelas={passeio.parcelas}
+                passeioPreco={passeio.preco}
+                passeioPreco1={passeio.preco}
+                passeioPreco2={passeio.preco}
+                passeioLabel1="Preço"
+                passeioLabel2="Preço"
+                passeioTemFaixas={false}
+                passeioDuracao={passeio.duracao}
+                passeioHorarios={passeio.horarios}
+                passeioCategoria={passeio.categoria}
+              />
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal para Galeria -->
+  <div id="imageModal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
+    <div class="relative max-w-4xl max-h-full">
+      <button 
+        onclick="closeModal()"
+        class="absolute -top-10 right-0 text-white hover:text-gray-300 text-2xl"
+      >
+        ✕
+      </button>
+      <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  function openModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = imageSrc;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  // Fechar modal ao clicar fora da imagem
+  document.getElementById('imageModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
+    }
+  });
+</script>

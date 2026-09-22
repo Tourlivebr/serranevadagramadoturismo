@@ -1,0 +1,610 @@
+---
+// Remover todo o array todosPasseios daqui - agora será definido no JavaScript
+---
+
+<header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/50 dark:bg-dark-900/50 backdrop-blur-md border-b border-gray-200/20 dark:border-dark-700/20">
+  <div class="container mx-auto px-2 lg:px-4">
+    <nav class="header-nav flex items-center justify-between h-20 lg:h-28" aria-label="Navegação principal">
+      <!-- Logo -->
+      <a href="/" class="flex items-center justify-center h-full ml-2 lg:ml-0 group mobile-landscape-hide header-logo" aria-label="Página inicial">
+        <img 
+          src="/images/Logo_Serra_Nevada.png" 
+          alt="RLM Turismo" 
+          class="h-full w-auto max-h-[85%] transition-transform group-hover:scale-105 object-contain"
+          width="160"
+          height="112"
+        />
+      </a>
+      
+      <!-- Search Bar - Desktop -->
+      <div class="hidden lg:flex flex-1 max-w-md mx-8 relative items-center mobile-landscape-hide">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="Buscar passeios ou Ingressos..."
+            class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+            autocomplete="off"
+          />
+          <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          
+          <!-- Search Results Dropdown -->
+          <div id="search-results" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-80 overflow-y-auto hidden z-50">
+            <!-- Results will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Inline Search - Mobile scrolled (CENTRALIZADO) - Apenas aparece no mobile scrolled -->
+      <div class="hidden md:hidden header-scrolled-search flex-1 max-w-[80%] mx-auto justify-center relative">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="mobile-scrolled-search-input"
+            placeholder="Buscar passeios ou Ingressos..."
+            class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm text-sm"
+            autocomplete="off"
+          />
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <div id="mobile-scrolled-search-results" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden z-50">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex items-center space-x-8 mobile-landscape-hide" role="menubar">
+        <li role="none">
+          <a 
+            href="#quem-sou" 
+            class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors duration-200 scroll-smooth"
+            role="menuitem"
+          >
+            Início
+          </a>
+        </li>
+        <li role="none" class="relative group">
+          <button 
+            class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors duration-200 flex items-center"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Serviços
+            <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-200 dark:border-dark-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="py-2">
+              <a href="/ingressos" class="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-600 transition-colors">
+                <div class="font-medium">Ingressos e Atrações</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">Gramado e Canela</div>
+              </a>
+              <a href="/passeios" class="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-600 transition-colors">
+                <div class="font-medium">Translados e Passeios</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">Tours personalizados</div>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li role="none">
+          <a 
+            href="#depoimentos" 
+            class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors duration-200 scroll-smooth"
+            role="menuitem"
+          >
+            Depoimentos
+          </a>
+        </li>
+        <li role="none">
+          <a 
+            href="#contato" 
+            class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors duration-200 scroll-smooth"
+            role="menuitem"
+          >
+            Contato
+          </a>
+        </li>
+      </ul>
+      
+      <div class="hidden mobile-landscape-show flex-1 max-w-md mx-3 relative">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="mobile-landscape-search-input"
+            placeholder="Buscar passeios ou Ingressos..."
+            class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+            autocomplete="off"
+          />
+          <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          
+          <div id="mobile-landscape-search-results" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden z-50">
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Search Button -->
+      <button 
+        id="mobile-search-button"
+        class="md:hidden lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-800 transition-colors ml-auto mobile-landscape-hide header-mobile-search-btn"
+        aria-label="Abrir busca"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+      
+      <!-- Mobile Menu Button -->
+      <button 
+        id="mobile-menu-button"
+        class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-800 transition-colors mobile-landscape-menu"
+        aria-label="Abrir menu de navegação"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </nav>
+    
+    <!-- Mobile Search Bar -->
+    <div id="mobile-search" class="lg:hidden hidden px-4 pb-4">
+      <div class="relative max-w-md mx-auto">
+        <input 
+          type="text" 
+          id="mobile-search-input"
+          placeholder="Buscar passeios ou Ingressos..."
+          class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+          autocomplete="off"
+        />
+        <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        
+        <!-- Mobile Search Results -->
+        <div id="mobile-search-results" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden z-50">
+          <!-- Results will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu (estrutura e estilo IDENTICOS ao desktop) -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-dark-900 border-t border-gray-200 dark:border-dark-700/60 shadow-xl z-[60] absolute w-full left-0 right-0 top-full">
+      <div class="container mx-auto px-6 py-6 space-y-5 text-left">
+        <a href="#quem-sou" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 font-semibold text-lg mobile-menu-link py-2 border-b border-gray-100 dark:border-dark-700/50 last:border-b-0">Início</a>
+        
+        <!-- Mobile Services Dropdown (IGUAL desktop dropdown: 2 niveis, titulo + subtitulo, hover primary) -->
+        <div class="pb-1 border-b border-gray-100 dark:border-dark-700/50 last:border-b-0">
+          <button id="mobile-services-toggle" class="flex items-center justify-between w-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 font-semibold text-lg py-2">
+            Serviços
+            <svg class="w-5 h-5 transition-transform text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-menu" class="hidden pl-2 sm:pl-4 mt-2 mb-3 space-y-3 rounded-xl bg-gray-50 dark:bg-dark-800/60 py-3 px-3 border border-gray-200/70 dark:border-dark-700/50 shadow-inner">
+            <a href="/ingressos" class="block px-3 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700/60 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 mobile-menu-link border border-transparent hover:border-primary-100 dark:hover:border-primary-900/40">
+              <div class="font-semibold text-base">Ingressos e Atrações</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Gramado e Canela</div>
+            </a>
+            <a href="/passeios" class="block px-3 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700/60 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 mobile-menu-link border border-transparent hover:border-primary-100 dark:hover:border-primary-900/40">
+              <div class="font-semibold text-base">Translados e Passeios</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Tours personalizados</div>
+            </a>
+          </div>
+        </div>
+        
+        <a href="#depoimentos" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 font-semibold text-lg mobile-menu-link py-2 border-b border-gray-100 dark:border-dark-700/50">Depoimentos</a>
+        <a href="#contato" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 font-semibold text-lg mobile-menu-link py-2 border-b border-gray-100 dark:border-dark-700/50">Contato</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Dados COMPLETOS dos passeios e ingressos para busca (15 itens = 5 ingressos + 10 receptivo)
+  const todosPasseios = [
+    // Ingressos e Atrações (5) — CarrosselPasseios.astro
+    {
+      id: 1,
+      titulo: "Era do Fogo Fondue Temático",
+      subtitulo: "Fondue na Caverna Pré-Histórica",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/era-do-fogo"
+    },
+    {
+      id: 2,
+      titulo: "Ferrovia Secreta Hector",
+      subtitulo: "Trem Mágico com Comida Americana",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/ferrovia-secreta"
+    },
+    {
+      id: 3,
+      titulo: "Hector Pizzaria",
+      subtitulo: "Rodízio de Pizza na Escola Ônyra",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/hector-pizzaria"
+    },
+    {
+      id: 4,
+      titulo: "Gatzz Fondue & Show",
+      subtitulo: "Dinner Show de Broadway na Serra Gaúcha",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/gatzz"
+    },
+    {
+      id: 5,
+      titulo: "ParksNet Passaporte",
+      subtitulo: "Parques e Atrações da Serra Gaúcha",
+      categoria: "INGRESSOS E ATRAÇÕES",
+      tipo: "ingressos",
+      href: "/parksnet"
+    },
+    // Passeios e Receptivo (10) — CarrosselPasseiosReceptivo.astro
+    {
+      id: 6,
+      titulo: "City Tour Privativo",
+      subtitulo: "Roteiro personalizado com motorista/guia",
+      categoria: "CITY TOUR",
+      tipo: "passeios",
+      href: "/passeio/city-tour-privativo"
+    },
+    {
+      id: 7,
+      titulo: "Transporte Olivas",
+      subtitulo: "Translado para as Olivas de Gramado",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/transporte-olivas"
+    },
+    {
+      id: 8,
+      titulo: "Transporte Jolimont",
+      subtitulo: "Translado para a Vinícola Jolimont",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/transporte-jolimont"
+    },
+    {
+      id: 9,
+      titulo: "Transporte Sky Glass",
+      subtitulo: "Translado para a Skyglass Canela",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/transporte-sky-glass"
+    },
+    {
+      id: 10,
+      titulo: "Bondinhos Transporte",
+      subtitulo: "Translado para os Bondinhos Aéreos",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/bondinhos-transporte"
+    },
+    {
+      id: 11,
+      titulo: "City Tour Nova Petrópolis",
+      subtitulo: "Roteiro completo por Nova Petrópolis",
+      categoria: "CITY TOUR",
+      tipo: "passeios",
+      href: "/passeio/city-tour-nova-petropolis"
+    },
+    {
+      id: 12,
+      titulo: "Lumni Transporte",
+      subtitulo: "Translado para a experiência Lumni",
+      categoria: "TRANSFER",
+      tipo: "passeios",
+      href: "/passeio/lumni-transporte"
+    },
+    {
+      id: 13,
+      titulo: "Trem Maria Fumaça",
+      subtitulo: "Passeio de Maria Fumaça pela Serra Gaúcha",
+      categoria: "TREM",
+      tipo: "passeios",
+      href: "/passeio/maria-fumaca"
+    },
+    {
+      id: 14,
+      titulo: "Transfer Ida e Volta • Porto Alegre / Gramado ou Canela",
+      subtitulo: "Transporte privativo executivo com motorista/guia",
+      categoria: "RECEPTIVO",
+      tipo: "passeios",
+      href: "/transfer-privativo"
+    },
+    {
+      id: 15,
+      titulo: "Tour Linha Bella",
+      subtitulo: "História, cultura e sabores da Serra Gaúcha",
+      categoria: "CULTURA",
+      tipo: "passeios",
+      href: "/passeio/tour-linha-bella"
+    }
+  ];
+
+  // Header scroll behavior
+  const header = document.getElementById('header');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+  const mobileServicesToggle = document.getElementById('mobile-services-toggle');
+  const mobileServicesMenu = document.getElementById('mobile-services-menu');
+  const mobileSearchButton = document.getElementById('mobile-search-button');
+  const mobileSearch = document.getElementById('mobile-search');
+  const searchInput = document.getElementById('search-input');
+  const mobileSearchInput = document.getElementById('mobile-search-input');
+  const mobileLandscapeSearchInput = document.getElementById('mobile-landscape-search-input');
+  const mobileScrolledSearchInput = document.getElementById('mobile-scrolled-search-input');
+  const searchResults = document.getElementById('search-results');
+  const mobileSearchResults = document.getElementById('mobile-search-results');
+  const mobileLandscapeSearchResults = document.getElementById('mobile-landscape-search-results');
+  const mobileScrolledSearchResults = document.getElementById('mobile-scrolled-search-results');
+  
+  let isMenuOpen = false;
+  let isServicesOpen = false;
+  let isMobileSearchOpen = false;
+  
+  // Search functionality
+  function performSearch(query, resultsContainer) {
+    console.log('Performing search for:', query); // Debug
+    
+    if (!query.trim()) {
+      resultsContainer.classList.add('hidden');
+      return;
+    }
+    
+    const filteredPasseios = todosPasseios.filter(passeio => 
+      passeio.titulo.toLowerCase().includes(query.toLowerCase()) ||
+      (passeio.subtitulo && passeio.subtitulo.toLowerCase().includes(query.toLowerCase()))
+    );
+    
+    console.log('Filtered results:', filteredPasseios); // Debug
+    
+    if (filteredPasseios.length === 0) {
+      resultsContainer.innerHTML = `
+        <div class="p-4 text-gray-500 text-center">
+          Nenhum passeio encontrado para "${query}"
+        </div>
+      `;
+    } else {
+      resultsContainer.innerHTML = filteredPasseios.map(passeio => {
+        const href = passeio.href || `/${passeio.slug || ''}`;
+        return `
+          <a href="${href}" class="block p-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0">
+            <div class="font-medium text-gray-800">${passeio.titulo}</div>
+            <div class="text-sm text-gray-600">${passeio.subtitulo || ''}</div>
+            <div class="text-xs text-accent-600 mt-1">${passeio.categoria}</div>
+          </a>
+        `;
+      }).join('');
+    }
+    
+    resultsContainer.classList.remove('hidden');
+  }
+  
+  // Desktop search
+  searchInput?.addEventListener('input', (e) => {
+    performSearch(e.target.value, searchResults);
+  });
+  
+  // Mobile search
+  mobileSearchInput?.addEventListener('input', (e) => {
+    performSearch(e.target.value, mobileSearchResults);
+  });
+
+  mobileLandscapeSearchInput?.addEventListener('input', (e) => {
+    performSearch(e.target.value, mobileLandscapeSearchResults);
+  });
+
+  mobileScrolledSearchInput?.addEventListener('input', (e) => {
+    performSearch(e.target.value, mobileScrolledSearchResults);
+  });
+  
+  // Hide search results when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#search-input') && !e.target.closest('#search-results')) {
+      searchResults?.classList.add('hidden');
+    }
+    if (!e.target.closest('#mobile-search-input') && !e.target.closest('#mobile-search-results')) {
+      mobileSearchResults?.classList.add('hidden');
+    }
+    if (!e.target.closest('#mobile-landscape-search-input') && !e.target.closest('#mobile-landscape-search-results')) {
+      mobileLandscapeSearchResults?.classList.add('hidden');
+    }
+    if (!e.target.closest('#mobile-scrolled-search-input') && !e.target.closest('#mobile-scrolled-search-results')) {
+      mobileScrolledSearchResults?.classList.add('hidden');
+    }
+  });
+  
+  // Mobile search toggle
+  mobileSearchButton?.addEventListener('click', () => {
+    isMobileSearchOpen = !isMobileSearchOpen;
+    
+    if (isMobileSearchOpen) {
+      header?.classList.add('mobile-search-active');
+      mobileScrolledSearchInput?.focus();
+    } else {
+      header?.classList.remove('mobile-search-active');
+      mobileScrolledSearchResults?.classList.add('hidden');
+    }
+  });
+
+  const mobileLandscapeMq = window.matchMedia('(max-height: 600px) and (orientation: landscape)');
+  const syncLandscapeSearch = () => {
+    if (!mobileLandscapeMq.matches) return;
+    if (isMobileSearchOpen) {
+      isMobileSearchOpen = false;
+      header?.classList.remove('mobile-search-active');
+      mobileScrolledSearchResults?.classList.add('hidden');
+    }
+  };
+  syncLandscapeSearch();
+  mobileLandscapeMq.addEventListener?.('change', syncLandscapeSearch);
+  
+  // Scroll behavior
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 0) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  });
+  
+  // Mobile menu toggle
+  mobileMenuButton?.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+      mobileMenu?.classList.remove('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'true');
+    } else {
+      mobileMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      // Reset services menu when closing main menu
+      isServicesOpen = false;
+      mobileServicesMenu?.classList.add('hidden');
+      const arrow = mobileServicesToggle?.querySelector('svg');
+      arrow?.classList.remove('rotate-180');
+    }
+  });
+  
+  // Mobile services dropdown toggle
+  mobileServicesToggle?.addEventListener('click', () => {
+    isServicesOpen = !isServicesOpen;
+    const arrow = mobileServicesToggle.querySelector('svg');
+    
+    if (isServicesOpen) {
+      mobileServicesMenu?.classList.remove('hidden');
+      arrow?.classList.add('rotate-180');
+    } else {
+      mobileServicesMenu?.classList.add('hidden');
+      arrow?.classList.remove('rotate-180');
+    }
+  });
+  
+  // Close mobile menu when clicking on links
+  mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      isMenuOpen = false;
+      isServicesOpen = false;
+      mobileMenu?.classList.add('hidden');
+      mobileServicesMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      const arrow = mobileServicesToggle?.querySelector('svg');
+      arrow?.classList.remove('rotate-180');
+    });
+  });
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      const href = this instanceof HTMLElement ? this.getAttribute('href') : null;
+      const target = href ? document.querySelector(href) : null;
+      
+      if (target) {
+        const headerElement = document.getElementById('header');
+        const headerHeight = headerElement?.offsetHeight || 0;
+        const targetPosition = target.offsetTop - headerHeight - 20;
+        
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: 'smooth'
+        });
+        
+        // Hide search results after navigation
+        searchResults?.classList.add('hidden');
+        mobileSearchResults?.classList.add('hidden');
+        mobileLandscapeSearchResults?.classList.add('hidden');
+        mobileScrolledSearchResults?.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
+<style>
+  .scrolled {
+    @apply h-16 lg:h-20;
+  }
+  .scrolled .header-nav img {
+    @apply h-16 lg:h-20 py-0;
+    max-height: 75% !important;
+  }
+
+  @media (max-width: 767px) {
+    #header.scrolled .header-logo,
+    #header.mobile-search-active .header-logo {
+      display: none !important;
+    }
+    #header.scrolled .header-mobile-search-btn,
+    #header.mobile-search-active .header-mobile-search-btn {
+      display: flex !important;
+    }
+    #header.scrolled .header-scrolled-search,
+    #header.mobile-search-active .header-scrolled-search {
+      display: flex !important;
+    }
+    #header.scrolled .header-nav {
+      height: 3.5rem !important;
+    }
+    #header.mobile-search-active .header-nav {
+      height: 5rem !important;
+    }
+    #mobile-search {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .scrolled .header-nav {
+      height: 5rem !important;
+    }
+    .scrolled .header-logo {
+      height: 5rem !important;
+    }
+  }
+
+  @media (max-height: 600px) and (orientation: landscape) {
+    #header .mobile-landscape-hide {
+      display: none !important;
+    }
+    #header .mobile-landscape-show {
+      display: flex !important;
+      max-width: none !important;
+    }
+    #header .mobile-landscape-menu {
+      display: inline-flex !important;
+    }
+    #header #mobile-search {
+      display: none !important;
+    }
+    #header .header-nav {
+      height: 4rem !important;
+    }
+    #header.scrolled .header-scrolled-search {
+      display: none !important;
+    }
+  }
+</style>

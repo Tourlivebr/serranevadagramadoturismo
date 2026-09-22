@@ -1,0 +1,609 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import StarRating from '../../components/StarRating.astro';
+import FormReserva from '../../components/FormReserva.astro';
+
+// Função necessária para modo estático
+export async function getStaticPaths() {
+  return [
+    { params: { slug: 'tour-o-quatrilho' } },
+    { params: { slug: 'tour-trem-vinho' } },
+    { params: { slug: 'city-tour-privativo' } },
+    { params: { slug: 'transporte-olivas' } },
+    { params: { slug: 'transporte-jolimont' } },
+    { params: { slug: 'transporte-sky-glass' } },
+    { params: { slug: 'bondinhos-transporte' } },
+    { params: { slug: 'city-tour-nova-petropolis' } },
+    { params: { slug: 'lumni-transporte' } },
+    { params: { slug: 'maria-fumaca' } },
+    { params: { slug: 'transfer-privativo' } },
+    { params: { slug: 'tour-linha-bella' } }
+  ];
+}
+
+// Dados dos passeios (10 genéricos, SEM o transfer-privativo — esse vai para a rota plana)
+const passeiosData = {
+  'tour-o-quatrilho': {
+    id: 1,
+    titulo: "Tour O Quatrilho",
+    subtitulo: "Passeio Rural Com Almoço Típico",
+    categoria: "PASSEIOS",
+    preco: 28.17,
+    avaliacao: 4.81,
+    totalAvaliacoes: 36,
+    parcelas: "A partir de:",
+    price1: 28.17,
+    price2: 28.17,
+    label1: "Preço por pessoa",
+    label2: "Preço por pessoa",
+    temFaixas: false,
+    descricao: "Embarque em uma jornada única pela história e cultura da região colonial. O Tour O Quatrilho oferece uma experiência autêntica com almoço típico preparado com receitas tradicionais das famílias locais, visitação aos cenários do famoso filme 'O Quatrilho' e um passeio encantador pelas vilas históricas que preservam a essência da imigração italiana.",
+    inclusos: [
+      "Transporte ida e volta",
+      "Almoço típico completo",
+      "Guia especializado",
+      "Visitação aos pontos históricos",
+      "Degustação de produtos locais"
+    ],
+    duracao: "8 horas",
+    horarios: ["08:00", "14:00"],
+    galeria: [
+      "/images/cristais_de_gramado_o_inquestionavel.jpg",
+      "/images/terra-magica-florybal.webp"
+    ],
+    tags: ["Almoço típico com receitas locais", "História do filme 'O Quatrilho'", "Tour por vilas históricas"]
+  },
+  'tour-trem-vinho': {
+    id: 2,
+    titulo: "Tour Trem e Vinho",
+    subtitulo: "Com Trem Maria Fumaça e Épopeia",
+    categoria: "PASSEIOS",
+    preco: 61.50,
+    avaliacao: 4.93,
+    totalAvaliacoes: 218,
+    parcelas: "A partir de:",
+    price1: 61.50,
+    price2: 61.50,
+    label1: "Preço por pessoa",
+    label2: "Preço por pessoa",
+    temFaixas: false,
+    descricao: "Uma experiência única que combina a nostalgia do Trem Maria Fumaça com a magia dos vinhedos locais. Desfrute de uma viagem inesquecível pelo Parque Epopéia, com degustação de vinhos artesanais, apresentações culturais e paisagens deslumbrantes da Serra Gaúcha.",
+    inclusos: [
+      "Passagem no Trem Maria Fumaça",
+      "Entrada no Parque Epopéia",
+      "Degustação de vinhos e sucos",
+      "Apresentações culturais",
+      "Guia especializado"
+    ],
+    duracao: "6 horas",
+    horarios: ["09:00", "15:00"],
+    galeria: [
+      "/images/transfer11.jpg",
+      "/images/terra-magica-florybal.webp"
+    ],
+    tags: ["Caminhada pelo Parque Epopéia", "Degustação de vinhos e sucos", "Apresentações culturais"]
+  },
+  'city-tour-privativo': {
+    id: 3,
+    titulo: "City Tour Privativo",
+    subtitulo: "Roteiro personalizado com motorista/guia",
+    categoria: "CITY TOUR",
+    preco: 380,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    price1: 380,
+    price2: 480,
+    label1: "1 a 4 pessoas",
+    label2: "5 a 6 pessoas",
+    temFaixas: true,
+    descricao: "Explore Gramado e Canela com exclusividade! Nosso City Tour Privativo oferece um roteiro totalmente personalizado de acordo com seu estilo, tempo e preferências. Conte com motorista/guia experiente para conhecer os melhores pontos turísticos, lojas, restaurantes e paisagens deslumbrantes da Serra Gaúcha com todo conforto e segurança.",
+    inclusos: [
+      "Veículo privativo com ar condicionado",
+      "Motorista/guia experiente",
+      "Busca e retorno no hotel",
+      "Roteiro personalizado",
+      "Água mineral disponível"
+    ],
+    duracao: "9 horas",
+    horarios: ["09:00"],
+    galeria: [
+      "/images/transfer11.jpg",
+      "/images/link_passeios1.jpg"
+    ],
+    tags: ["Roteiro flexível", "Privacidade total", "Motorista/guia incluso", "Busca no hotel"]
+  },
+  'transporte-olivas': {
+    id: 4,
+    titulo: "Transporte Olivas",
+    subtitulo: "Translado para as Olivas de Gramado",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    price1: 200,
+    price2: 350,
+    label1: "1 a 4 pessoas",
+    label2: "5 a 6 pessoas",
+    temFaixas: true,
+    descricao: "Aproveite a comodidade do transporte executivo para visitar as Olivas de Gramado, um dos locais mais charmosos da Serra Gaúcha. Nossa equipe garante um trajeto seguro e confortável para que você aproveite ao máximo essa experiência única, sem preocupações com estacionamento ou trajeto.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Olivas - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/olivas/olivas_card.jpg",
+      "/images/olivas/olivas_card.jpg"
+    ],
+    tags: ["Ida e Volta", "Executivo", "Ar Condicionado", "Busca no hotel"]
+  },
+  'transporte-jolimont': {
+    id: 5,
+    titulo: "Transporte Jolimont",
+    subtitulo: "Translado para a Vinícola Jolimont",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    price1: 200,
+    price2: 350,
+    label1: "1 a 4 pessoas",
+    label2: "5 a 6 pessoas",
+    temFaixas: true,
+    descricao: "Visite a tradicional Vinícola Jolimont com toda comodidade! Conhecida por seus vinhos premiados e arquitetura encantadora, a Jolimont oferece degustações, visitação aos vinhedos e uma experiência inesquecível para os amantes da enogastronomia. Garantimos transporte seguro e confortável em todas as etapas.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Jolimont - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/jolimont/jolimont.jpg",
+      "/images/jolimont/jolimont.jpg"
+    ],
+    tags: ["Ida e Volta", "Vinícola", "Degustação de vinhos", "Executivo"]
+  },
+  'transporte-sky-glass': {
+    id: 6,
+    titulo: "Transporte Sky Glass",
+    subtitulo: "Translado para a Skyglass Canela",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    price1: 200,
+    price2: 320,
+    label1: "1 a 4 pessoas",
+    label2: "5 a 6 pessoas",
+    temFaixas: true,
+    descricao: "Viva a adrenalina da Skyglass Canela, a primeira plataforma de aço e vidro da América Latina! Com vistas espetaculares do Vale da Ferradura, essa é uma experiência única para os amantes de aventura e paisagens de tirar o fôlego. Nosso transporte executivo garante que você chegue e volte com segurança e conforto.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Skyglass - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/skyglass/skyglass.jpg",
+      "/images/skyglass/skyglass.jpg"
+    ],
+    tags: ["Ida e Volta", "Aventura", "Vale da Ferradura", "Executivo"]
+  },
+  'bondinhos-transporte': {
+    id: 7,
+    titulo: "Bondinhos Transporte",
+    subtitulo: "Translado para os Bondinhos Aéreos",
+    categoria: "TRANSFER",
+    preco: 180,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    price1: 180,
+    price2: 320,
+    label1: "1 a 4 pessoas",
+    label2: "5 a 6 pessoas",
+    temFaixas: true,
+    descricao: "Conheça os Bondinhos Aéreos de Canela e tenha uma vista panorâmica incrível de toda a Serra Gaúcha! Passeie pelas alturas e contemple paisagens deslumbrantes do Parque da Serra e da região. Nossa equipe de transporte garante um trajeto tranquilo para você focar apenas em aproveitar a experiência.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Bondinhos - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/bondinhos.avif"
+    ],
+    tags: ["Ida e Volta", "Bondinhos Aéreos", "Vista Panorâmica", "Executivo"]
+  },
+  'city-tour-nova-petropolis': {
+    id: 8,
+    titulo: "City Tour Nova Petrópolis",
+    subtitulo: "Roteiro completo por Nova Petrópolis",
+    categoria: "CITY TOUR",
+    preco: 320,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    price1: 320,
+    price2: 400,
+    label1: "1 a 4 pessoas",
+    label2: "5 a 6 pessoas",
+    temFaixas: true,
+    descricao: "Descubra a charmosa Nova Petrópolis, cidade da imigração alemã conhecida como a terra do Ninho das Águias. Visite a Rua Coberta, a Aldeia do Imigrante, o Parque Aldeia do Imigrante e desfrute da deliciosa culinária germânica. Tudo isso com um roteiro completo e conforto garantido.",
+    inclusos: [
+      "Veículo privativo com ar condicionado",
+      "Motorista/guia experiente",
+      "Busca e retorno no hotel",
+      "Roteiro completo pelos principais pontos",
+      "Água mineral disponível"
+    ],
+    duracao: "8 horas",
+    horarios: ["08:30"],
+    galeria: [
+      "/images/Nova_Petropolis.jpg"
+    ],
+    tags: ["Nova Petrópolis", "Rua Coberta", "Imigração Alemã", "Culinária Germânica"]
+  },
+  'lumni-transporte': {
+    id: 9,
+    titulo: "Lumni Transporte",
+    subtitulo: "Translado para a experiência Lumni",
+    categoria: "TRANSFER",
+    preco: 200,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 a 4 pessoas:",
+    price1: 200,
+    price2: 300,
+    label1: "1 a 4 pessoas",
+    label2: "5 a 6 pessoas",
+    temFaixas: true,
+    descricao: "Viva a experiência única e imersiva do Lumni! Uma atração interativa que combina arte, tecnologia e storytelling para criar memórias inesquecíveis. Garantimos transporte confortável e seguro para que você e sua família aproveitem ao máximo cada momento dessa aventura.",
+    inclusos: [
+      "Transporte de ida e volta (Hotel - Lumni - Hotel)",
+      "Buscamos e deixamos no seu hotel",
+      "Veículo executivo com ar condicionado",
+      "Motorista experiente",
+      "Conforto e segurança total"
+    ],
+    duracao: "De acordo com sua permanência",
+    horarios: ["A combinar"],
+    galeria: [
+      "/images/lumini.webp"
+    ],
+    tags: ["Ida e Volta", "Experiência Imersiva", "Família", "Executivo"]
+  },
+  'maria-fumaca': {
+    id: 10,
+    titulo: "Trem Maria Fumaça",
+    subtitulo: "Passeio de Maria Fumaça pela Serra Gaúcha",
+    categoria: "TREM",
+    preco: 1300,
+    avaliacao: 5.0,
+    totalAvaliacoes: 0,
+    parcelas: "1 e 2 pessoas:",
+    price1: 1300,
+    price2: 2999.9,
+    label1: "1 e 2 pessoas",
+    label2: "6 pessoas",
+    temFaixas: true,
+    temTabelaCompleta: true,
+    faixasCompletas: [
+      { label: "1 e 2 pessoas", preco: 1300 },
+      { label: "3 pessoas", preco: 1500 },
+      { label: "4 pessoas", preco: 1999.9 },
+      { label: "5 pessoas", preco: 2499.9 },
+      { label: "6 pessoas", preco: 2999.9 }
+    ],
+    descricao: "Embarque em uma viagem inesquecível a bordo do clássico Trem Maria Fumaça pela Serra Gaúcha! Sinta a nostalgia das ferrovias antigas enquanto admira paisagens exuberantes, vales verdejantes e vilarejos encantadores. Um passeio imperdível para amantes de história, natureza e experiências autênticas na região mais charmosa do Rio Grande do Sul.",
+    inclusos: [
+      "Passagem no Trem Maria Fumaça (ida e volta)",
+      "Guia embarcado com explicações históricas",
+      "Parada para fotos nos pontos turísticos",
+      "Seguro de passageiros",
+      "Conforto e segurança durante todo o trajeto"
+    ],
+    duracao: "4 a 6 horas (depende do roteiro)",
+    horarios: ["09:00", "14:30"],
+    galeria: [
+      "/images/maria-fumaca/fumaca01.jpg",
+      "/images/maria-fumaca/maria-fumaca02.webp",
+      "/images/maria-fumaca/maria-fumaca03.webp",
+      "/images/maria-fumaca/maria-fumaca04.webp"
+    ],
+    tags: ["Trem a vapor", "História ferroviária", "Paisagens da Serra Gaúcha", "Família", "Fotografia"]
+  },
+  'tour-linha-bella': {
+    id: 11,
+    titulo: "Tour Linha Bella",
+    subtitulo: "História, cultura e sabores da Serra Gaúcha",
+    categoria: "CULTURA",
+    preco: 319.00,
+    avaliacao: 4.9,
+    totalAvaliacoes: 187,
+    parcelas: "Por pessoa:",
+    price1: 319.00,
+    price2: 319.00,
+    label1: "Por pessoa",
+    label2: "Crianças / grupos consulte",
+    temFaixas: false,
+    temQuantidadePorPessoa: true,
+    valorPorPessoa: 319.00,
+    descricao: "Tour Linha Bella - Uma viagem pela história, cultura e sabores da Serra Gaúcha! Na Cantina Linha Bella é impossível resistir ao pecado da gula. O restaurante é inspirado nos antigos porões Italianos onde as famílias reuniam-se para festejar e se fartar. Nosso Buffet conta com uma vasta variedade de saladas, 4 tipos de massas, 3 tipos de molhos, galeto assado, galinha caipira, costela suína, polenta mole, arroz, feijão, lasanha, além de deliciosas sobremesas que trazem lembranças dos sabores da nona. A antecedência mínima da compra deve ser de 48 hora(s) em relação ao horário da reserva.",
+    inclusos: [
+      "Transporte ida e volta ao seu local de hospedagem",
+      "Guia especializado compartilhando curiosidades e histórias da região",
+      "Visitação em uma vinícola com degustação de vinhos e sucos",
+      "Conheça o Casarão centenário da família Marcon com degustação de bolachas, geléias e doce de leite feito pela nona",
+      "Explore o Bodegão da Família Bof, marco zero de Gramado com degustação de salames, queijos e copas",
+      "Almoço típico italiano na Cantina Linha Bella, com música, dança e uma mesa farta de delícias"
+    ],
+    duracao: "Das 07:30 às 15:00 (aprox. 7h30)",
+    horarios: ["07:30 (saída)"],
+    galeria: [
+      "https://site-assets.planne.com.br/clients/linhabella/home-prevideo.jpg",
+      "https://site-assets.planne.com.br/clients/linhabella/noiteitaliana.jpg",
+      "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=vinicola%20familia%20italiana%20serra%20gaucha%20gramado%20canela%20barris%20de%20vinho%20madeira%20rustico%20luz%20quente%20fotografia%20realista&image_size=landscape_16_9",
+      "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=mesa%20farta%20almoço%20italiano%20cantina%20gramado%20galeto%20massas%20saladas%20lasanha%20polenta%20decoracao%20rustica%20italiana%20pessoas%20felizes%20fotografia&image_size=landscape_16_9",
+      "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=casa%20antiga%20colonial%20italiana%20casarao%20madeira%20centenario%20gramado%20serra%20gaucha%20jardim%20flores%20dia%20ensolarado&image_size=landscape_16_9"
+    ],
+    tags: ["Vinícola + degustação", "Casarão centenário", "Cantina Italiana", "História cultura", "Reserva antecipada 48h"]
+  }
+};
+
+const { slug } = Astro.params;
+const isTransferRedirect = slug === 'transfer-privativo';
+
+const TRANSFER_URL = "/transfer-privativo";
+const TRANSFER_TITLE = "Transfer Ida e Volta • Porto Alegre / Gramado ou Canela | Serra Nevada Gramado Turismo";
+const TRANSFER_DESC = "Translado privativo executivo entre Aeroporto de Porto Alegre (POA) e Gramado ou Canela! Formulário com 3 opções (só ida, só volta, ida+volta) com a Serra Nevada Gramado Turismo.";
+const TRANSFER_IMAGE = "/images/Transfer/Transfer.jpg";
+
+let passeio: any = null;
+let whatsappMessage = "";
+let whatsappUrl = "";
+
+if (!isTransferRedirect) {
+  passeio = passeiosData[slug as keyof typeof passeiosData];
+  if (!passeio) {
+    return Astro.redirect('/404');
+  }
+  whatsappMessage = `Olá! Gostaria de mais informações sobre o ${passeio.titulo} - ${passeio.subtitulo}. Valor: R$ ${passeio.preco.toFixed(2).replace('.', ',')} em ${passeio.parcelas}.`;
+  whatsappUrl = `https://wa.me/5554999411358?text=${encodeURIComponent(whatsappMessage)}`;
+}
+---
+
+{isTransferRedirect ? (
+  // =============== REDIRECT: slug /passeio/transfer-privativo cai AQUI (rota plana /transfer-privativo tem o form ESPECÍFICO) ===============
+  <BaseLayout
+    title={TRANSFER_TITLE}
+    description={TRANSFER_DESC}
+    keywords={['transfer ida e volta gramado', 'translado porto alegre gramado', 'transfer privativo canela', 'Serra Nevada Gramado Turismo']}
+    image={TRANSFER_IMAGE}
+    canonical={TRANSFER_URL}
+  >
+    <meta http-equiv="refresh" content={`0; url=${TRANSFER_URL}`} />
+    <Header />
+    <main class="min-h-screen flex items-center justify-center pt-24 pb-16 px-4">
+      <div class="max-w-xl w-full text-center">
+        <div class="mx-auto mb-6 w-20 h-20 rounded-full bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center text-4xl">🔄</div>
+        <h1 class="text-2xl lg:text-3xl font-extrabold text-gray-900 dark:text-white mb-3">Redirecionando...</h1>
+        <p class="text-gray-600 dark:text-gray-300 mb-8 text-sm lg:text-base">
+          Abrindo a página completa do Transfer Ida e Volta com formulário de 3 modos
+          (Só IDA, Só VOLTA, IDA &amp; VOLTA) já preenchido com os dados de exemplo.
+        </p>
+        <a
+          href={TRANSFER_URL}
+          class="inline-flex items-center justify-center gap-2.5 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 px-7 rounded-xl shadow-md shadow-primary-600/20 transition"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+          Abrir página do Transfer
+        </a>
+        <p class="mt-5 text-xs text-gray-400 dark:text-gray-500">
+          Se não for redirecionado automaticamente, clique no botão acima.
+        </p>
+      </div>
+    </main>
+    <Footer />
+    <script is:inline>
+      (function(){
+        try { window.top.location.replace('/transfer-privativo'); }
+        catch (e) { try { window.location.replace('/transfer-privativo'); } catch(e2) { window.location.href = '/transfer-privativo'; } }
+      })();
+    </script>
+  </BaseLayout>
+) : (
+  // =============== TEMPLATE PADRÃO (todas as 10 outras rotas de passeio) ===============
+  <BaseLayout
+    title={`${passeio.titulo} - ${passeio.subtitulo} | Serra Nevada Gramado Turismo - Gramado e Canela`}
+    description={`${passeio.descricao} Com a Serra Nevada Gramado Turismo, sua experiência na Serra Gaúcha é garantida!`}
+    keywords={[passeio.titulo.toLowerCase(), 'passeios Gramado', 'passeios Canela', 'Serra Nevada Gramado Turismo', 'Serra Gaúcha']}
+    image={passeio.galeria[0]}
+  >
+    <Header />
+
+    <main class="pt-20 lg:pt-24">
+      <!-- Hero Section -->
+      <section class="relative h-96 lg:h-[500px] overflow-hidden">
+        <img
+          src={passeio.galeria[0]}
+          alt={passeio.titulo}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-center text-white px-4">
+            <span class="inline-block px-3 py-1 bg-primary-600 text-white text-sm font-medium rounded-full mb-4">
+              {passeio.categoria}
+            </span>
+            <h1 class="text-4xl lg:text-6xl font-bold mb-4">{passeio.titulo}</h1>
+            <p class="text-xl lg:text-2xl text-gray-200">{passeio.subtitulo}</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container mx-auto px-4 py-12">
+        <div class="grid lg:grid-cols-3 gap-12">
+          <div class="lg:col-span-2">
+            <!-- Descrição -->
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold mb-4">Sobre este passeio</h2>
+              <p class="text-gray-700 leading-relaxed">{passeio.descricao}</p>
+            </div>
+
+            <!-- O que está incluso -->
+            <div class="mb-8">
+              <h3 class="text-xl font-bold mb-4">O que está incluso</h3>
+              <ul class="space-y-2">
+                {passeio.inclusos.map((item: string) => (
+                  <li class="flex items-center space-x-3">
+                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Tags -->
+            <div class="mb-8">
+              <h3 class="text-xl font-bold mb-4">Destaques</h3>
+              <div class="flex flex-wrap gap-2">
+                {passeio.tags.map((tag: string) => (
+                  <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Galeria de Imagens -->
+            <div class="mb-8">
+              <h3 class="text-xl font-bold mb-4">Galeria</h3>
+              <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                {passeio.galeria.map((imagem: string, index: number) => (
+                  <div class="aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity">
+                    <img
+                      src={imagem}
+                      alt={`${passeio.titulo} - Imagem ${index + 1}`}
+                      class="w-full h-full object-cover"
+                      onclick={`openModal('${imagem}')`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar de Reserva com Formulário -->
+          <div class="lg:col-span-1">
+            <div class="sticky top-32">
+              <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-lg" data-sidebar-preco>
+                <FormReserva
+                  passeioNome={passeio.titulo}
+                  passeioParcelas={passeio.label1}
+                  passeioPreco={passeio.price1}
+                  passeioPreco1={passeio.price1}
+                  passeioPreco2={passeio.price2}
+                  passeioLabel1={passeio.label1}
+                  passeioLabel2={passeio.label2}
+                  passeioTemFaixas={passeio.temFaixas}
+                  passeioDuracao={passeio.duracao}
+                  passeioHorarios={passeio.horarios}
+                  passeioCategoria={passeio.categoria}
+                  passeioFaixasCompletas={(passeio as any).faixasCompletas}
+                  passeioTemTabelaCompleta={(passeio as any).temTabelaCompleta}
+                  passeioTemQuantidadePorPessoa={(passeio as any).temQuantidadePorPessoa}
+                  passeioValorPorPessoa={(passeio as any).valorPorPessoa}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal para Galeria -->
+    <div id="imageModal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
+      <div class="relative max-w-4xl max-h-full">
+        <button
+          onclick="closeModal()"
+          class="absolute -top-10 right-0 text-white hover:text-gray-300 text-2xl"
+        >
+          ✕
+        </button>
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg" />
+      </div>
+    </div>
+
+    <Footer />
+  </BaseLayout>
+)}
+
+<script>
+  function openModal(imageSrc: string) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage') as HTMLImageElement | null;
+    if (!modal || !modalImage) return;
+    modalImage.src = imageSrc;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  // Fechar modal ao clicar fora da imagem
+  const imgModal = document.getElementById('imageModal');
+  if (imgModal) {
+    imgModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+  }
+
+  // Inicializar seletores de faixa de pessoas (seletor grande e sidebar)
+  document.querySelectorAll('[data-price-selector]').forEach(sel => {
+    const temFaixas = sel.getAttribute('data-tem-faixas') === 'true';
+    if (!temFaixas) return;
+    const btns = sel.querySelectorAll('.faixa-pessoas-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const faixa = btn.getAttribute('data-faixa'); // "1" ou "2"
+        btns.forEach(b => {
+          b.classList.remove('border-primary-500', 'ring-2', 'ring-primary-500');
+          b.classList.add('border-gray-200');
+        });
+        btn.classList.remove('border-gray-200');
+        btn.classList.add('border-primary-500', 'ring-2', 'ring-primary-500');
+        // Dispara evento global para atualizar sidebar
+        window.dispatchEvent(new CustomEvent('faixa-pessoas-mudou', { detail: { faixa } }));
+      });
+    });
+  });
+</script>

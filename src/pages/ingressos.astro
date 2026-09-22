@@ -1,0 +1,258 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StarRating from '../components/StarRating.astro';
+
+// Dados dos ingressos (categoria "INGRESSOS E ATRAÇÕES") - PARCEIROS OFICIAIS
+const ingressos = [
+  {
+    id: 1,
+    titulo: "Era do Fogo Fondue Temático",
+    subtitulo: "A experiência mais cavernosa de Gramado",
+    categoria: "FONDUE TEMÁTICO",
+    imagem: "https://assets.planne.com.br/apps/KXBS57CN5A8/images/_/v3wu8Q6aRqLU902MsUEdHkIpzMtHuN2NecOce9wx.png",
+    avaliacao: 4.8,
+    totalAvaliacoes: 320,
+    slug: "era-do-fogo",
+    linkOficial: "https://ingressos.eradofogo.com.br?ac=KRNSCTHGB7",
+    duracao: "2h30 a 3h (sessões 18h e 21h)",
+    tags: [
+      "Fondue na caverna pré-histórica",
+      "Dos criadores da Hector Pizzaria",
+      "Gruga e os cavernosos"
+    ]
+  },
+  {
+    id: 2,
+    titulo: "Ferrovia Secreta Hector",
+    subtitulo: "Sequência de comida americana no trem mágico",
+    categoria: "GASTRONOMIA TEMÁTICA",
+    imagem: "/images/ferrovia hector.webp",
+    avaliacao: 4.7,
+    totalAvaliacoes: 245,
+    slug: "ferrovia-secreta",
+    linkOficial: "https://ferroviasecreta.hectordragao.com.br?ac=DQ8YMF9ULH",
+    duracao: "2h30 por viagem",
+    tags: [
+      "Trem mágico do Hector",
+      "Comida americana farta",
+      "Mágica com Edgar Faísca"
+    ]
+  },
+  {
+    id: 3,
+    titulo: "Hector Pizzaria",
+    subtitulo: "Rodízio de Discos de Sabor na Escola de Magia Ônyra",
+    categoria: "RODÍZIO DE PIZZA",
+    imagem: "https://assets.planne.com.br/apps/56TSFCYPGR3/images/_/6XcTkjcRN2I8ApRkvYfnN7kGtCCPCd7fifjyAMpH.jpg",
+    avaliacao: 4.9,
+    totalAvaliacoes: 512,
+    slug: "hector-pizzaria",
+    linkOficial: "https://ingressos.hectordragao.com.br?ac=VJWCTJOVEW",
+    duracao: "2h a 2h30 (rodízio 80+ sabores)",
+    tags: [
+      "Escola de Magia Ônyra",
+      "Mais de 80 sabores de pizza",
+      "Pocket shows com personagens"
+    ]
+  },
+  {
+    id: 4,
+    titulo: "Gatzz Fondue & Show",
+    subtitulo: "Dinner show de Broadway na Serra Gaúcha",
+    categoria: "DINNER SHOW",
+    imagem: "https://fondue.gatzz.com.br/ambiente/gatzz1.jpg",
+    avaliacao: 4.8,
+    totalAvaliacoes: 380,
+    slug: "gatzz",
+    linkOficial: "https://www.gatzz.com.br?ac=X0GS9W27FL",
+    duracao: "~3h (jantar + espetáculo 22 artistas)",
+    tags: [
+      "Fondue premium 3 etapas",
+      "Show com 22 artistas",
+      "Classificação 18+ (alguns espetáculos)"
+    ]
+  },
+  {
+    id: 5,
+    titulo: "ParksNet Passaporte",
+    subtitulo: "Todos os parques da Serra Gaúcha em um só lugar",
+    categoria: "PASSEIOS E PARQUES",
+    imagem: "https://myjcwvyyspwituevmdeu.supabase.co/storage/v1/render/image/public/product-images/products/1788357118532-q366rrkc9m.webp?width=800&resize=contain&quality=80",
+    avaliacao: 4.9,
+    totalAvaliacoes: 1280,
+    slug: "parksnet",
+    linkOficial: "https://parksnet.com.br/ingressos/?bookingAgency=326",
+    duracao: "Varia conforme atração escolhida",
+    tags: [
+      "Snowland, NBA Park, Skyglass",
+      "Pague em até 10x sem juros",
+      "Cancelamento garantido"
+    ]
+  }
+];
+---
+
+<BaseLayout 
+  title="Ingressos e Atrações | Serra Nevada Gramado Turismo - Gramado e Canela"
+  description="Encontre os melhores ingressos para atrações em Gramado e Canela. Parques temáticos, museus e experiências únicas na Serra Gaúcha com a Serra Nevada Gramado Turismo!"
+  keywords={['ingressos Gramado', 'ingressos Canela', 'atrações Serra Gaúcha', 'parques temáticos RS', 'Serra Nevada Gramado Turismo']}
+  image="/images/link_ingressos.jpg"
+>
+  <Header />
+  
+  <main class="pt-20 lg:pt-24">
+    <!-- Hero Section -->
+    <section class="relative text-white py-8 lg:py-20">
+      <!-- Background Image com scroll default (mobile) + local (desktop, evita bug bg-fixed iOS) -->
+      <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-scroll lg:bg-local" style="background-image: url('/images/link_ingressos.jpg');">
+        <div class="absolute inset-0 bg-black/30"></div>
+      </div>
+      <div class="container relative z-10 mx-auto px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+          <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">Ingressos e Atrações</h1>
+          <p class="text-xl lg:text-2xl text-primary-100 mb-8 leading-relaxed">
+            Descubra as melhores atrações de Gramado e Canela
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div class="flex items-center text-primary-100">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Ingressos garantidos
+            </div>
+            <div class="flex items-center text-primary-100">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Suporte especializado
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divisor Boleado Suave -->
+      <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+        <svg 
+          viewBox="0 0 1200 120" 
+          preserveAspectRatio="none" 
+          class="relative block w-[calc(100%+1.3px)] h-[30px] lg:h-[50px]"
+        >
+          <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" class="fill-gray-50 dark:fill-gray-900"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="py-6 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div class="container mx-auto px-4">
+      </div>
+    </section>
+
+    <!-- Grid de Ingressos -->
+    <section class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+      <div class="container mx-auto px-4">
+        <div id="ingressos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {ingressos.map((ingresso) => (
+            <div class="ingresso-card h-full group" data-category={ingresso.titulo.toLowerCase().includes('parque') ? 'parques' : 'museus'}>
+            <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-dark-700 h-full flex flex-col">
+              <div class="relative h-52 lg:h-56 overflow-hidden">
+                <img 
+                  src={ingresso.imagem} 
+                  alt={ingresso.titulo}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm">
+                    {ingresso.categoria}
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 bg-white/90 dark:bg-dark-900/80 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700 dark:text-gray-200 shadow">
+                  ⭐ {ingresso.avaliacao}
+                </div>
+              </div>
+              
+              <div class="p-4 lg:p-5 flex flex-col flex-1 gap-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1">
+                    <StarRating rating={ingresso.avaliacao} />
+                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-1 font-medium">({ingresso.totalAvaliacoes})</span>
+                  </div>
+                  <span class="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                    ⏱ {ingresso.duracao}
+                  </span>
+                </div>
+                
+              <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors duration-300">
+                  {ingresso.titulo}
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2 flex-1">
+                  {ingresso.subtitulo}
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mt-2 mb-2">
+                  {ingresso.tags.slice(0, 2).map(tag => (
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <div class="flex flex-col gap-2 mt-auto">
+                  <a
+                    href={ingresso.linkOficial}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
+                  >
+                    RESERVE AGORA
+                  </a>
+                  
+                  <a
+                    href={`/${ingresso.slug}`}
+                    class="w-full border-2 border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
+                  >
+                    SAIBA MAIS
+                  </a>
+                </div>
+              </div>
+            </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Filtros
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active de todos os botões
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-primary-600', 'text-white');
+        b.classList.add('bg-gray-200', 'text-gray-700', 'dark:bg-dark-700', 'dark:text-gray-300');
+      });
+      
+      // Adiciona active ao botão clicado
+      btn.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-dark-700', 'dark:text-gray-300');
+      btn.classList.add('bg-primary-600', 'text-white');
+      
+      const filter = btn.dataset.filter;
+      const cards = document.querySelectorAll('.ingresso-card');
+      
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

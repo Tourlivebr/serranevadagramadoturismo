@@ -1,0 +1,601 @@
+---
+const passeiosReceptivo = [
+  {
+    id: 1,
+    title: "City Tour Privativo",
+    subtitle: "Roteiro personalizado com motorista/guia",
+    category: "CITY TOUR",
+    image: "/images/transfer11.jpg",
+    price1: 380,
+    label1: "1 a 4 pessoas",
+    price2: 480,
+    label2: "5 a 6 pessoas",
+    slug: "city-tour-privativo",
+    whatsappText: "Olá! Quero reservar o City Tour Privativo.",
+    rating: 4.9,
+    tags: [
+      "Roteiro 100% personalizado",
+      "Busca e retorno no hotel",
+      "Veículo com ar condicionado"
+    ]
+  },
+  {
+    id: 2,
+    title: "Transporte Olivas",
+    subtitle: "Translado para as Olivas de Gramado",
+    category: "TRANSFER",
+    image: "/images/olivas/olivas_card.jpg",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 350,
+    label2: "5 a 6 pessoas",
+    slug: "transporte-olivas",
+    whatsappText: "Olá! Quero reservar o Transporte para as Olivas.",
+    rating: 4.8,
+    tags: [
+      "Ida e volta executivo",
+      "Veículo com ar condicionado",
+      "Sem stress com estacionamento"
+    ]
+  },
+  {
+    id: 3,
+    title: "Transporte Jolimont",
+    subtitle: "Translado para a Vinícola Jolimont",
+    category: "TRANSFER",
+    image: "/images/jolimont/jolimont.jpg",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 350,
+    label2: "5 a 6 pessoas",
+    slug: "transporte-jolimont",
+    whatsappText: "Olá! Quero reservar o Transporte para a Jolimont.",
+    rating: 4.9,
+    tags: [
+      "Vinícola premiada",
+      "Bento Gonçalves com conforto",
+      "Motorista experiente"
+    ]
+  },
+  {
+    id: 4,
+    title: "Transporte Sky Glass",
+    subtitle: "Translado para a Skyglass Canela",
+    category: "TRANSFER",
+    image: "/images/skyglass/skyglass.jpg",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 320,
+    label2: "5 a 6 pessoas",
+    slug: "transporte-sky-glass",
+    whatsappText: "Olá! Quero reservar o Transporte para Sky Glass.",
+    rating: 4.8,
+    tags: [
+      "Mirante de vidro 360°",
+      "Vale da Ferradura",
+      "Sem preocupação com trajeto"
+    ]
+  },
+  {
+    id: 5,
+    title: "Bondinhos Transporte",
+    subtitle: "Translado para os Bondinhos Aéreos",
+    category: "TRANSFER",
+    image: "/images/bondinhos.avif",
+    price1: 180,
+    label1: "1 a 4 pessoas",
+    price2: 320,
+    label2: "5 a 6 pessoas",
+    slug: "bondinhos-transporte",
+    whatsappText: "Olá! Quero reservar o Transporte dos Bondinhos.",
+    rating: 4.7,
+    tags: [
+      "Vista panorâmica aérea",
+      "Parque da Serra",
+      "Ida e volta segura"
+    ]
+  },
+  {
+    id: 6,
+    title: "City Tour Nova Petrópolis",
+    subtitle: "Roteiro completo por Nova Petrópolis",
+    category: "CITY TOUR",
+    image: "/images/Nova_Petropolis.jpg",
+    price1: 320,
+    label1: "1 a 4 pessoas",
+    price2: 400,
+    label2: "5 a 6 pessoas",
+    slug: "city-tour-nova-petropolis",
+    whatsappText: "Olá! Quero reservar o City Tour de Nova Petrópolis.",
+    rating: 4.9,
+    tags: [
+      "Rua Coberta de NP",
+      "Aldéia do Imigrante",
+      "Culinária germânica"
+    ]
+  },
+  {
+    id: 7,
+    title: "Lumni Transporte",
+    subtitle: "Translado para a experiência Lumni",
+    category: "TRANSFER",
+    image: "/images/lumini.webp",
+    price1: 200,
+    label1: "1 a 4 pessoas",
+    price2: 300,
+    label2: "5 a 6 pessoas",
+    slug: "lumni-transporte",
+    whatsappText: "Olá! Quero reservar o Transporte Lumni.",
+    rating: 4.8,
+    tags: [
+      "Experiência imersiva única",
+      "Arte + tecnologia",
+      "Família e diversão"
+    ]
+  },
+  {
+    id: 8,
+    title: "Trem Maria Fumaça",
+    subtitle: "Passeio de Maria Fumaça pela Serra Gaúcha",
+    category: "TREM",
+    image: "/images/maria-fumaca/fumaca01.jpg",
+    price1: 1300,
+    label1: "1 e 2 pessoas",
+    price2: 2999.9,
+    label2: "6 pessoas",
+    slug: "maria-fumaca",
+    whatsappText: "Olá! Quero reservar o passeio de Trem Maria Fumaça.",
+    rating: 5.0,
+    tags: [
+      "Trem a vapor nostálgico",
+      "Paisagens da Serra Gaúcha",
+      "Guia embarcado incluso"
+    ]
+  },
+  {
+    id: 9,
+    title: "Transfer Ida e Volta • Porto Alegre / Gramado ou Canela",
+    subtitle: "Transporte privativo executivo com motorista/guia",
+    category: "RECEPTIVO",
+    image: "/images/Transfer/Transfer.jpg",
+    price1: 280,
+    label1: "1 trecho (só ida ou só volta)",
+    price2: 550,
+    label2: "Ida e Volta",
+    slug: "transfer-privativo",
+    whatsappText: "Olá! Quero reservar o Transfer Ida e Volta Porto Alegre / Gramado ou Canela.",
+    rating: 5.0,
+    tags: [
+      "Aeroporto POA direto",
+      "Caxias do Sul também",
+      "Motorista credenciado"
+    ]
+  },
+  {
+    id: 10,
+    title: "Tour Linha Bella",
+    subtitle: "Uma viagem pela história, cultura e sabores da Serra Gaúcha",
+    category: "CULTURA",
+    image: "https://site-assets.planne.com.br/clients/linhabella/home-prevideo.jpg",
+    price1: 319.00,
+    label1: "Por pessoa",
+    price2: 319.00,
+    label2: "Reserva antecipada 48h",
+    slug: "tour-linha-bella",
+    whatsappText: "Olá! Quero reservar o Tour Linha Bella.",
+    rating: 4.9,
+    tags: [
+      "Vinícola + degustação",
+      "Casarão centenário",
+      "Almoço italiano Cantina"
+    ]
+  }
+];
+---
+
+<section id="passeios-receptivo" class="relative pb-12 lg:pb-20 pt-0 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-dark-800 dark:to-dark-700">
+  <div class="container mx-auto px-4">
+    <div class="text-center">
+      <div class="flex items-center justify-center mb-6">
+        <div class="h-px bg-gradient-to-r from-transparent via-primary-400 to-transparent flex-1 max-w-xs"></div>
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mx-8">
+          Translados e <span class="text-primary-600 dark:text-primary-400">Passeios</span>
+        </h2>
+        <div class="h-px bg-gradient-to-r from-transparent via-primary-400 to-transparent flex-1 max-w-xs"></div>
+      </div>
+    </div>
+
+    <div class="relative z-20 group/carousel">
+      <div class="overflow-hidden" id="carousel-viewport-passeios-receptivo">
+        <div id="carousel-track-passeios-receptivo" class="flex transition-transform duration-[850ms] ease-out will-change-transform [backface-visibility:hidden] [transform:translateZ(0)]">
+          {passeiosReceptivo.map((passeio) => (
+            <div class="flex-none w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3">
+              <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col">
+                <div class="relative h-52 lg:h-56 overflow-hidden">
+                  <img 
+                    src={passeio.image} 
+                    alt={passeio.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div class="absolute top-3 left-3">
+                    <span class="bg-primary-600 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
+                      {passeio.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="p-4 lg:p-5 flex-1 flex flex-col gap-2">
+                  <h3 class="font-bold text-2xl lg:text-xl text-gray-900 dark:text-white leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors">
+                    {passeio.title}
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400 text-lg lg:text-base leading-relaxed line-clamp-2">
+                    {passeio.subtitle}
+                  </p>
+
+                  {passeio.tags && (
+                    <div class="flex flex-wrap gap-2 mt-1">
+                      {passeio.tags.slice(0, 2).map(tag => (
+                        <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium line-clamp-1">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div class="border-t border-gray-100 dark:border-dark-700 pt-3 mt-auto space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                      <div class="bg-gray-50 dark:bg-dark-700/50 rounded-lg p-2 text-center">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label1}</p>
+                        <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
+                          R$ {passeio.price1.toFixed(2).replace('.', ',')}
+                        </p>
+                      </div>
+                      <div class="bg-gray-50 dark:bg-dark-700/50 rounded-lg p-2 text-center">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">{passeio.label2}</p>
+                        <p class="text-lg font-bold text-primary-600 dark:text-primary-400 mt-1">
+                          R$ {passeio.price2.toFixed(2).replace('.', ',')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-2 mt-auto">
+                    <a
+                      href={`/passeio/${passeio.slug}`}
+                      class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base shadow-md"
+                    >
+                      RESERVE AGORA
+                    </a>
+                    
+                    <a
+                      href={`https://wa.me/5554996474071?text=${encodeURIComponent(passeio.whatsappText || `Olá! Gostaria de reservar o passeio: ${passeio.title}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="w-full border-2 border-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 text-green-600 dark:text-green-400 font-semibold py-3 px-4 rounded-xl transition-colors duration-200 block text-center text-base"
+                    >
+                      Fale no WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button 
+        id="prev-btn-passeios-receptivo"
+        class="hidden sm:flex absolute sm:-left-1 lg:-left-2 top-1/2 -translate-y-1/2 sm:-translate-x-2 lg:-translate-x-1/2 bg-white dark:bg-dark-800 shadow-lg shadow-black/15 dark:shadow-black/50 rounded-full items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 hover:shadow-xl hover:scale-105 transition-all duration-200 z-30 ring-1 ring-black/5 dark:ring-white/10
+
+               sm:w-[52px] sm:h-[52px] sm:p-3
+               lg:w-14 lg:h-14 lg:p-3
+
+               opacity-0 sm:opacity-80 sm:hover:opacity-100
+               translate-z-0 will-change-transform"
+        aria-label="Anterior"
+        type="button"
+        tabindex="0"
+      >
+        <svg class="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      
+      <button 
+        id="next-btn-passeios-receptivo"
+        class="hidden sm:flex absolute sm:-right-1 lg:-right-2 top-1/2 -translate-y-1/2 sm:translate-x-2 lg:translate-x-1/2 bg-white dark:bg-dark-800 shadow-lg shadow-black/15 dark:shadow-black/50 rounded-full items-center justify-center active:scale-95 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-600 hover:shadow-xl hover:scale-105 transition-all duration-200 z-30 ring-1 ring-black/5 dark:ring-white/10
+
+               sm:w-[52px] sm:h-[52px] sm:p-3
+               lg:w-14 lg:h-14 lg:p-3
+
+               opacity-0 sm:opacity-80 sm:hover:opacity-100
+               translate-z-0 will-change-transform"
+        aria-label="Próximo"
+        type="button"
+        tabindex="0"
+      >
+        <svg class="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-700 dark:text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="indicators-passeios-receptivo" class="flex items-center justify-center mt-5 mb-2 gap-2.5 relative z-20 touch-manipulation">
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10">
+    <svg 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none" 
+      class="relative block w-[calc(100%+1.3px)] h-[40px] lg:h-[60px]"
+    >
+      <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" class="fill-white dark:fill-gray-900"></path>
+    </svg>
+  </div>
+</section>
+
+<script>
+  function initCarouselPasseiosReceptivo() {
+    let currentSlide = 0;
+    const carouselTrack = document.getElementById('carousel-track-passeios-receptivo');
+    const viewport = document.getElementById('carousel-viewport-passeios-receptivo');
+    const prevBtn = document.getElementById('prev-btn-passeios-receptivo');
+    const nextBtn = document.getElementById('next-btn-passeios-receptivo');
+    const indicatorsContainer = document.getElementById('indicators-passeios-receptivo');
+
+    if (!carouselTrack || !indicatorsContainer) return;
+
+    const visibleItems = [...carouselTrack.children];
+    let isAnimating = false;
+
+    function isMobile() {
+      return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+    }
+
+    function getSlidesPerView() {
+      const width = window.innerWidth;
+      if (width >= 1280) return 4;
+      if (width >= 1024) return 3;
+      if (width >= 640) return 2;
+      return 1;
+    }
+    
+    function getTotalSlides() {
+      const slidesPerView = getSlidesPerView();
+      return Math.max(1, Math.ceil(visibleItems.length - slidesPerView + 1));
+    }
+
+    function updateIndicators() {
+      const totalSlides = getTotalSlides();
+      const mobile = isMobile();
+      indicatorsContainer.innerHTML = '';
+      
+      for (let i = 0; i < totalSlides; i++) {
+        const indicator = document.createElement('button');
+        const active = i === currentSlide;
+        if (mobile) {
+          indicator.className = `h-1.5 rounded-full transition-all duration-300 ease-out touch-manipulation ${
+            active
+              ? 'w-8 bg-primary-600 shadow-sm shadow-primary-600/40'
+              : 'w-2 bg-gray-300 dark:bg-dark-600'
+          }`;
+        } else {
+          indicator.className = `h-3 w-3 rounded-full transition-colors duration-200 touch-manipulation ${
+            active ? 'bg-primary-600' : 'bg-gray-300 dark:bg-dark-600'
+          }`;
+        }
+        indicator.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+        indicator.addEventListener('click', () => {
+          if (isAnimating) return;
+          currentSlide = i;
+          updateCarousel();
+        });
+        indicatorsContainer.appendChild(indicator);
+      }
+    }
+    
+    function updateCarousel() {
+      if (!visibleItems || visibleItems.length === 0) return;
+      isAnimating = true;
+      const firstItem = visibleItems[0];
+      const itemWidth = firstItem.getBoundingClientRect().width;
+      carouselTrack.style.transform = `translate3d(-${currentSlide * itemWidth}px, 0, 0)`;
+      updateIndicators();
+      setTimeout(() => { isAnimating = false; }, 900);
+    }
+
+    function nextSlide() {
+      if (isAnimating) return;
+      const totalSlides = getTotalSlides();
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+    
+    function prevSlide() {
+      if (isAnimating) return;
+      const totalSlides = getTotalSlides();
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    nextBtn?.addEventListener('click', nextSlide);
+    prevBtn?.addEventListener('click', prevSlide);
+
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
+    let deltaX = 0;
+    let deltaY = 0;
+    let startTime = 0;
+    let axisLocked = false;
+    let isHorizontal = false;
+
+    // Touch swipe MELHORADO (detecta eixo X vs Y + threshold progressivo)
+    if (carouselTrack) {
+      carouselTrack.style.touchAction = 'pan-y';
+    }
+
+    carouselTrack.addEventListener('touchstart', (e) => {
+      if (!e.touches || e.touches.length === 0) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      deltaX = 0;
+      deltaY = 0;
+      isDragging = true;
+      axisLocked = false;
+      isHorizontal = false;
+      startTime = Date.now();
+      stopAutoPlay();
+    }, { passive: true });
+
+    carouselTrack.addEventListener('touchmove', (e) => {
+      if (!isDragging || !e.touches || e.touches.length === 0) return;
+      const cx = e.touches[0].clientX;
+      const cy = e.touches[0].clientY;
+      deltaX = startX - cx;
+      deltaY = Math.abs(startY - cy);
+
+      if (!axisLocked) {
+        const dxAbs = Math.abs(deltaX);
+        if (dxAbs > 10 || deltaY > 10) {
+          axisLocked = true;
+          isHorizontal = dxAbs >= deltaY;
+        }
+      }
+      // Se for movimento vertical, NÃO interrompa o scroll do navegador
+      if (axisLocked && !isHorizontal) {
+        isDragging = false;
+        return;
+      }
+      // Feedback visual enquanto arrasta (só no mobile)
+      if (axisLocked && isHorizontal && isMobile() && carouselTrack && visibleItems[0]) {
+        const itemWidth = visibleItems[0].getBoundingClientRect().width;
+        const base = currentSlide * itemWidth;
+        const overflow = Math.abs(deltaX) > itemWidth ? (deltaX > 0 ? 1 : -1) * itemWidth * 0.2 : 0;
+        carouselTrack.style.transform = `translate3d(-${base + deltaX - overflow}px, 0, 0)`;
+      }
+    }, { passive: true });
+    
+    carouselTrack.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      const elapsed = Date.now() - startTime;
+      const absDx = Math.abs(deltaX);
+      const firstItem = visibleItems[0];
+      const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 200;
+
+      // Só considera swipe em eixo HORIZONTAL (evita conflito scroll vertical da pagina)
+      const triggerSwipe = axisLocked && isHorizontal && (
+        absDx >= itemWidth * 0.2 || (elapsed < 280 && absDx >= 30)
+      );
+
+      if (triggerSwipe && absDx > 0) {
+        if (deltaX > 0) {
+          nextSlide();
+        } else if (deltaX < 0) {
+          prevSlide();
+        }
+      } else {
+        // Nenhum swipe valido: retorna suavemente para posicao original
+        if (isMobile()) {
+          updateCarousel();
+        }
+      }
+      
+      deltaX = 0;
+      isDragging = false;
+      axisLocked = false;
+      isHorizontal = false;
+      
+      setTimeout(() => {
+        startAutoPlay();
+      }, isMobile() ? 6000 : 2000);
+    }, { passive: true });
+
+    // Evita clique acidental em card apos swipe longo
+    let lastSwipeTime = 0;
+    carouselTrack.addEventListener('click', (ev) => {
+      if (Date.now() - lastSwipeTime < 280 && Math.abs(deltaX) > 20) {
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    }, true);
+
+    let autoPlayInterval;
+    function startAutoPlay() {
+      stopAutoPlay();
+      const mobile = isMobile();
+      const interval = mobile ? 11000 : 5000; // <=== MOBILE MAIS LENTO: 11s vs desktop 5s
+      autoPlayInterval = setInterval(() => {
+        if (document.hidden || document.visibilityState === 'hidden') return;
+        nextSlide();
+      }, interval);
+    }
+    
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = undefined;
+      }
+    }
+
+    // Pausa em qualquer interacao do usuario mobile
+    viewport?.addEventListener('touchstart', stopAutoPlay, { passive: true });
+    viewport?.addEventListener('touchend', stopAutoPlay, { passive: true });
+    viewport?.addEventListener('touchcancel', stopAutoPlay, { passive: true });
+
+    carouselTrack.addEventListener('mouseenter', stopAutoPlay);
+    carouselTrack.addEventListener('mouseleave', startAutoPlay);
+    carouselTrack.addEventListener('touchstart', () => { lastSwipeTime = Date.now(); }, { passive: true });
+
+    // Pausa AUTOMATICAMENTE quando a aba nao estiver visivel (economia bateria mobile)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoPlay();
+      } else {
+        startAutoPlay();
+      }
+    });
+
+    // ============== DESKTOP: SCROLL WHEEL no CARROSSEL (nunca mais trava a rolagem) ==============
+    let lastWheelSlide2 = 0;
+    function onWheelReceptivo(evt) {
+      if (isAnimating) return;
+      const dx = Math.abs(evt.deltaX);
+      const dy = Math.abs(evt.deltaY);
+      const isHorizontal = (dx > dy) || (evt.shiftKey && dy > 0);
+      if (isHorizontal) {
+        if (Date.now() - lastWheelSlide2 < 450) return;
+        lastWheelSlide2 = Date.now();
+        if (evt.deltaX > 1 || evt.deltaY > 1) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+      // Vertical SEM PREVENT DEFAULT => rola pagina normal!
+    }
+    if (viewport) {
+      viewport.addEventListener('wheel', onWheelReceptivo, { passive: true });
+    }
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        currentSlide = 0;
+        updateCarousel();
+      }, 180);
+    });
+
+    updateCarousel();
+    startAutoPlay();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarouselPasseiosReceptivo);
+  } else {
+    initCarouselPasseiosReceptivo();
+  }
+</script>

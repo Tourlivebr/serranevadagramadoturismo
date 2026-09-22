@@ -1,0 +1,183 @@
+---
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  keywords?: string[];
+}
+
+const {
+  title,
+  description,
+  image = '/images/Logo_Serra_Nevada.png',
+  canonical,
+  noindex = false,
+  keywords = ['Gramado', 'Canela', 'Serra Gaúcha', 'turismo', 'translado', 'passeios', 'ingressos', 'Serra Nevada Gramado Turismo'],
+} = Astro.props;
+
+// Criar URLs de forma segura
+const baseUrl = Astro.site?.toString() || 'https://rlmturismogramado.vercel.app/';
+const canonicalURL = canonical || new URL(Astro.url.pathname, baseUrl).toString();
+const socialImage = new URL(image, baseUrl).toString();
+
+// Detecta tipo MIME e dimensões conhecidas do og:image (WhatsApp/Facebook usam isso)
+const isJpg = image.toLowerCase().endsWith('.jpg') || image.toLowerCase().endsWith('.jpeg');
+const isPng = image.toLowerCase().endsWith('.png');
+const ogType = isJpg ? 'image/jpeg' : isPng ? 'image/png' : 'image/jpeg';
+// Dimensões conhecidas dos nossos assets (WhatsApp prefere >= 300px, recomendado 1200x630)
+const ogWidth =
+  image.includes('og-default-1200x630') ? 1200 :
+  image.includes('link_passeios1') ? 1600 :
+  image.includes('logo') ? 512 : 1200;
+const ogHeight =
+  image.includes('og-default-1200x630') ? 630 :
+  image.includes('link_passeios1') ? 900 :
+  image.includes('logo') ? 512 : 630;
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="author" content="Serra Nevada Gramado Turismo" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook / WhatsApp (WhatsApp respeita OG) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Serra Nevada Gramado Turismo" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    
+    <!-- Imagem OG (obrigatória para WhatsApp) + sub-propriedades -->
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content={ogType} />
+    <meta property="og:image:width" content={ogWidth.toString()} />
+    <meta property="og:image:height" content={ogHeight.toString()} />
+    <meta property="og:image:alt" content={title} />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rlmturismogramado" />
+    <meta name="twitter:creator" content="@rlmturismogramado" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={title} />
+    
+    <!-- WhatsApp específico: pré-carrega og:image no body (força cache) -->
+    <link rel="preload" as="image" href={socialImage} imagesrcset="" imagesizes="" fetchpriority="high" />
+    <link rel="image_src" href={socialImage} />
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "Serra Nevada Gramado Turismo",
+      "alternateName": "Guia Turismo Serra Gaúcha",
+      "description": description,
+      "url": canonicalURL,
+      "image": socialImage,
+      "telephone": "+5554999411358",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gramado",
+        "addressRegion": "Rio Grande do Sul",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -29.3655,
+        "longitude": -50.8243
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "priceRange": "R$",
+      "sameAs": [
+        "https://www.instagram.com/serranevadagramadoturismo/",
+        "https://www.facebook.com/serranevadagramadadoturismo"
+      ]
+    })} />
+
+    
+    <style>
+      :root {
+        /* Paleta Serra Nevada Gramado — baseada na logo
+           Primary: AZUL MARINHO (borda, montanhas, árvores, SERRA NEVADA, TURISMO)
+           Accent:  LARANJA/DOURADO (sol e GRAMADO da logo)
+           Dark:    AZUL MARINHO profundo */
+        --clr-primary-50:  #EDF2FB;
+        --clr-primary-100: #D7E2F5;
+        --clr-primary-200: #B0C5EB;
+        --clr-primary-300: #88A8E0;
+        --clr-primary-400: #608BD6;
+        --clr-primary-500: #386ECC;
+        --clr-primary-600: #1A4FA8;
+        --clr-primary-700: #143C7E;
+        --clr-primary:      #1A4FA8;
+
+        --clr-accent-50:  #FFF4E8;
+        --clr-accent-100: #FFE5C7;
+        --clr-accent-200: #FFCA8F;
+        --clr-accent-300: #FFAF57;
+        --clr-accent-400: #FF9520;
+        --clr-accent-500: #FF7A00;
+        --clr-accent-600: #E66A00;
+        --clr-accent:      #FF7A00;
+
+        --clr-dark-50:  #F0F4FB;
+        --clr-dark-100: #DCE4F5;
+        --clr-dark-300: #8FA7DB;
+        --clr-dark-500: #1A4FA8;
+        --clr-dark-700: #0E2953;
+        --clr-dark-800: #0A1E40;
+        --clr-dark:      #0A1E40;
+
+        --clr-whatsapp: #25D366;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      ::selection {
+        background: var(--clr-primary);
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-dark-800 font-sans antialiased">
+    <slot />
+    <WhatsAppButton />
+  </body>
+</html>
