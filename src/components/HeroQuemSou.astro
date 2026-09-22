@@ -14,10 +14,10 @@
     style="background-image: url('/images/Fundo_gramado1.png');"
   ></div>
 
-  <!-- Overlay para melhorar leitura -->
+  <!-- Overlay para melhorar legibilidade -->
   <div
     class="absolute inset-0 z-[5]
-           bg-gradient-to-b from-black/35 via-black/10 to-transparent
+           bg-gradient-to-b from-black/30 via-black/10 to-transparent
            lg:bg-gradient-to-r lg:from-black/55 lg:via-black/25 lg:to-transparent"
   ></div>
 
@@ -49,20 +49,18 @@
 
   <!-- =====================================================
        MASCOTE MOBILE
-       Mais acima do arco e mais alinhado esteticamente
+       Mais centralizado e mais próximo do botão
   ====================================================== -->
   <div
     class="lg:hidden absolute
-           bottom-[35px]
-           left-1/2 -translate-x-1/2
-           right-[-2%]
-           sm:bottom-[34px]
-           sm:right-[2%]
+           bottom-[22px]
+           left-1/2
+           -translate-x-1/2
            z-[10]
-           w-[66%]
-           max-w-[320px]
-           sm:w-[58%]
-           sm:max-w-[360px]
+           w-[64%]
+           max-w-[300px]
+           sm:w-[56%]
+           sm:max-w-[340px]
            pointer-events-none"
   >
     <img
@@ -77,15 +75,15 @@
   </div>
 
   <!-- =====================================================
-       CONTEÚDO
+       CONTEÚDO PRINCIPAL
   ====================================================== -->
   <div
     class="relative z-[20]
            container mx-auto
            px-4 lg:px-8
            pt-4 sm:pt-6
-           pb-[40vh]
-           sm:pb-[38vh]
+           pb-[42vh]
+           sm:pb-[40vh]
            lg:pb-[8vh]"
   >
     <div
@@ -171,6 +169,7 @@
                  animate-zoom-in"
           style="animation-delay: 0.5s; opacity: 0;"
         >
+          <!-- Ícone calendário -->
           <svg
             class="w-5 h-5 sm:w-6 sm:h-6 shrink-0"
             fill="none"
@@ -201,6 +200,7 @@
 
           <span>MONTE SEU ROTEIRO</span>
 
+          <!-- Seta -->
           <svg
             class="w-5 h-5 shrink-0"
             fill="none"
@@ -273,8 +273,8 @@
       class="relative
              block
              w-[calc(100%+1.3px)]
-             h-[52px]
-             sm:h-[60px]
+             h-[48px]
+             sm:h-[58px]
              lg:h-[85px]"
     >
       <path
@@ -287,7 +287,7 @@
 
 <style>
   /* =====================================================
-     ANIMAÇÃO DE ENTRADA DOS TEXTOS
+     ANIMAÇÃO DE ENTRADA
   ====================================================== */
   @keyframes zoom-in {
     0% {
@@ -307,7 +307,7 @@
   }
 
   /* =====================================================
-     BOUNCE DESKTOP
+     ANIMAÇÃO DESKTOP
   ====================================================== */
   @keyframes bounce-slow {
     0%,
@@ -326,17 +326,17 @@
   }
 
   /* =====================================================
-     BOUNCE MOBILE
+     ANIMAÇÃO MOBILE
      Mais suave e mais elegante
   ====================================================== */
   @keyframes bounce-slow-mobile {
     0%,
     100% {
-      transform: translateY(4%);
+      transform: translateY(2%);
     }
 
     50% {
-      transform: translateY(calc(4% - 8px));
+      transform: translateY(calc(2% - 7px));
     }
   }
 
@@ -346,7 +346,7 @@
   }
 
   /* =====================================================
-     AJUSTE PARA TELAS MUITO PEQUENAS
+     AJUSTES FINOS PARA TELAS MUITO PEQUENAS
   ====================================================== */
   @media (max-width: 420px) {
     .mascote-mobile {
